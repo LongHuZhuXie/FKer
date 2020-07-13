@@ -14,6 +14,7 @@
 #include "MK60_uart.h"
 #include "camera.h"
 #include "elector.h"
+#include <stdlib.h>
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      PROTAÖÐ¶ÏÖ´ÐÐº¯Êý
 //  @return     void   
@@ -90,6 +91,9 @@ void UART4_RX_TX_IRQHandler(void)
 						break;
 					case 'D':
 						direction.D = (float)atof(tmp);
+						break;
+					case 'T':
+						THRESHOLD	=	atoi(tmp);
 						break;
 					default:
 						;

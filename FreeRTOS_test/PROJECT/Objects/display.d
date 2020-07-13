@@ -27,3 +27,4 @@
 .\objects\display.o: ..\DSP\Include\arm_math.h
 .\objects\display.o: E:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\display.o: E:\keil5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\display.o: ..\HARDWARE\Camera\camera.h
