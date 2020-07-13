@@ -304,20 +304,23 @@ void Image_Binary()
 	uint8 pos=0;
 	uint8 tmpdst;
 	uint8 k=0;
-	for (uint16 i = 0; i < ROW; i++)
+	uint8 j;
+	uint8 i;
+	for (i = 0; i < ROW; i++)
 	{
 		k=0;
-		for (uint16 j = 0; j < COL ; j++)
+		for (j = 0; j < COL ; j++)
 		{
+			if (image[i][j] < THRESHOLD) tmpdst = (tmpdst<<1);
+			else tmpdst = (tmpdst<<1)| 0x01;
+			pos++;
 			if (pos == 8)
 			{
 				pos = 0;
 				image_binary[i][k] = tmpdst;
-				k++;
+				k+=1;
 			}
-			if (image[i][j] < THRESHOLD) tmpdst = (tmpdst<<1);
-			else tmpdst = (tmpdst<<1)| 0x01;
-			pos++;
+			//printf("pos=%d [%d][%d]\n",pos,i,k);
 		}
 	}
 }
