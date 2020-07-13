@@ -22,3 +22,8 @@
 .\objects\display.o: ..\FWLIB\inc\MK60_ftm.h
 .\objects\display.o: ..\HARDWARE\Decode\decode.h
 .\objects\display.o: ..\HARDWARE\ADC\adc.h
+.\objects\display.o: ..\USER\elector.h
+.\objects\display.o: ..\HARDWARE\STEERING\steering.h
+.\objects\display.o: ..\DSP\Include\arm_math.h
+.\objects\display.o: E:\keil5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\display.o: E:\keil5\ARM\ARMCC\Bin\..\include\math.h
