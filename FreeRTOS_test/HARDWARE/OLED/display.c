@@ -12,6 +12,7 @@
 #include "decode.h"
 #include "adc.h"
 #include "elector.h"
+#include "camera.h"
 
 //#define ADC_MOD   1
 #define SPID_MOD  2
@@ -45,6 +46,8 @@ void OLED_Display(void)
 	OLED_P6x8Str( 0,  4, (uint8 *)Dis_Buf);
 	sprintf(Dis_Buf,"SD: %f ",direction.D);
 	OLED_P6x8Str( 0,  5, (uint8 *)Dis_Buf);
+	sprintf(Dis_Buf,"ST: %d ",THRESHOLD);
+	OLED_P6x8Str( 0,  6, (uint8 *)Dis_Buf);
 	#else
 	sprintf(Dis_Buf,"Left  Duty:   %.1f%% ",Motor_PWM.left_pwm1/10.0f);
 	OLED_P6x8Str( 0,  3, (uint8 *)Dis_Buf);

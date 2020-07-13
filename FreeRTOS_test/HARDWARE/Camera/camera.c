@@ -22,6 +22,8 @@ uint8		image_binary[ROW][COL/8];
 uint8   receive[3];
 uint8   receive_num = 0;
 uint8   uart_receive_flag = 1;
+uint8 THRESHOLD= 120;
+
 
 //需要配置到摄像头的数据
 int16 MT9V032_CFG[CONFIG_FINISH][2]=

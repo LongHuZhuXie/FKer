@@ -27,9 +27,21 @@ Project File Date:  07/13/2020
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\keil5\ARM\ARMCC\Bin'
 Build target 'MK66FX'
+compiling isr.c...
+..\HARDWARE\Camera\camera.h(56): warning:  #1295-D: Deprecated declaration Image_Binary - give arg types
+  void Image_Binary();
+..\SYSTEM\isr.c(87): warning:  #167-D: argument of type "const uint8 *" is incompatible with parameter of type "const char *"
+  						direction.P = (float)atof(tmp);
+..\SYSTEM\isr.c(90): warning:  #167-D: argument of type "const uint8 *" is incompatible with parameter of type "const char *"
+  						direction.I = (float)atof(tmp);
+..\SYSTEM\isr.c(93): warning:  #167-D: argument of type "const uint8 *" is incompatible with parameter of type "const char *"
+  						direction.D = (float)atof(tmp);
+..\SYSTEM\isr.c(96): warning:  #167-D: argument of type "const uint8 *" is incompatible with parameter of type "const char *"
+  						THRESHOLD	=	(int)atoi(tmp);
+..\SYSTEM\isr.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=23096 RO-data=3296 RW-data=328 ZI-data=146984  
-".\Objects\Templete.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=23520 RO-data=3368 RW-data=328 ZI-data=146984  
+".\Objects\Templete.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -43,7 +55,7 @@ Package Vendor: Keil
   E:\keil5\pack\Keil\Kinetis_K60_DFP\1.5.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
