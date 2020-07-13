@@ -144,9 +144,10 @@ void Camera_Task(void *pvParameters)
 	{
 		if(Image_Finish_Flag)
 		{
-			//Image_Binary();
-			//Send_Image();
+			Image_Binary();
+			Send_Image();
 			Image_Finish_Flag = 0;
+			//vTaskSuspend(Camera_Task_Handler);
 		}
 		vTaskDelay(10);
 	}

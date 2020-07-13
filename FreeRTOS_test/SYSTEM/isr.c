@@ -13,7 +13,7 @@
 #include "MK60_dma.h"
 #include "MK60_uart.h"
 #include "camera.h"
-
+#include "elector.h"
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      PROTA中断执行函数
 //  @return     void   
@@ -69,32 +69,32 @@ void UART3_RX_TX_IRQHandler(void)
 
 void UART4_RX_TX_IRQHandler(void)
 {
-		static uint8 cmmd[2];
+		static uint8 cmmd[20];
 		static uint8 pos=0;
+		const uint8	 *tmp = &cmmd[1];
     if(UART4->S1 & UART_S1_RDRF_MASK)		//接收数据寄存器满
     {
 //     char temp = UART4->D; 
 			uart_getchar (uart4, &cmmd[pos]);
-			if(pos == 1){
+			if(cmmd[pos] != 'N' && pos <= 20){pos++;}
+			else{
+				cmmd[pos] = '\0';
 				pos=0;
 				switch(cmmd[0])
 				{
 					case 'P':
+						direction.P = (float)atof(tmp);
 						break;
 					case 'I':
+						direction.I = (float)atof(tmp);
 						break;
 					case 'D':
-						break;
-					case 'R':
-						break;
-					case 'C':
+						direction.D = (float)atof(tmp);
 						break;
 					default:
 						;
 				}
-				printf("%c%c ",cmmd[0],cmmd[1]);
-			}
-			else{pos++;} 			
+			} 			
     }
     if(UART4->S1 & UART_S1_TDRE_MASK )	//发送数据寄存器空
     {
