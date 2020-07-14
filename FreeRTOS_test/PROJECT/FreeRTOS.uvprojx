@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>__TARGET_FPU_VFP,__FPU_PRESENT=1,ARM_MATH_CM4,_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\FWLIB\src;..\FWLIB\inc;..\SYSTEM;..\FreeRTOS;..\FreeRTOS\include;..\FreeRTOS\portable\MemMang;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\DSP\Lib\ARM;..\DSP\Include;..\DSP\Source;..\HARDWARE\OLED;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\MOTOR;..\HARDWARE\BUZZER;..\HARDWARE\USART;..\HARDWARE\STEERING;..\HARDWARE\Decode;..\HARDWARE\Camera;..\HARDWARE\ADC</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\FWLIB\src;..\FWLIB\inc;..\SYSTEM;..\FreeRTOS;..\FreeRTOS\include;..\FreeRTOS\portable\MemMang;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\DSP\Lib\ARM;..\DSP\Include;..\DSP\Source;..\HARDWARE\OLED;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\MOTOR;..\HARDWARE\BUZZER;..\HARDWARE\USART;..\HARDWARE\STEERING;..\HARDWARE\Decode;..\HARDWARE\Camera;..\HARDWARE\ADC;..\HARDWARE\AT24C02;..\HARDWARE\IIC</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -476,6 +476,11 @@
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\ADC\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>AT24C02.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\AT24C02\AT24C02.c</FilePath>
             </File>
           </Files>
         </Group>

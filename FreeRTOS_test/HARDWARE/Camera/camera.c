@@ -326,3 +326,4 @@ void Image_Binary()
 		}
 	}
 }
+

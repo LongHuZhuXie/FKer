@@ -14,6 +14,7 @@
 ".\objects\decode.o"
 ".\objects\camera.o"
 ".\objects\adc.o"
+".\objects\at24c02.o"
 ".\objects\common.o"
 ".\objects\misc.o"
 ".\objects\mk60_adc.o"

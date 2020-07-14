@@ -1175,10 +1175,10 @@ ARM Macro Assembler    Page 19
 
 
 erwork --depend=.\objects\startup_mk66f18.d -o.\objects\startup_mk66f18.o -I.\R
-TE\_MK66FX -IE:\keil5\pack\Keil\Kinetis_K60_DFP\1.5.0\Device\Include -IE:\keil5
-\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSI
-ON SETA 527" --predefine="MK66FX1M0xxx18 SETA 1" --list=.\listings\startup_mk66
-f18.lst ..\CORE\startup_MK66F18.s
+TE\_MK66FX -ID:\Keil5_MDK\Packs\Keil\Kinetis_K60_DFP\1.5.0\Device\Include -ID:\
+Keil5_MDK\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predefine="__UVIS
+ION_VERSION SETA 528" --predefine="MK66FX1M0xxx18 SETA 1" --list=.\listings\sta
+rtup_mk66f18.lst ..\CORE\startup_MK66F18.s
 
 
 

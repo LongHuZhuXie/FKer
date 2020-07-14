@@ -1,10 +1,10 @@
 /*********************************************************************************************************************
  * @file       	MyTask.c
- * @version			V1.0
- * @Software 		MDK 5.28
+ * @version		V1.0
+ * @Software 	MDK 5.28
  * @TargetCore	MK66FX
  * @date       	2019-12-23
- * @note				所有任务都写在此文件中
+ * @note		所有任务都写在此文件中
  ********************************************************************************************************************/
 /* Task System */
 #include "MyTask.h"
@@ -27,14 +27,13 @@
 #include "camera.h"
 #include "adc.h"
 #include "MK60_flash.h"
+#include "AT24C02.h"
 
 /* PID */
 #include "elector.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* Private Variables */
-char Version_Data[5];
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,31 +45,31 @@ void Init_Task(void *pvParameters);
  *	@brief	外设初始化
  *	@param	pvParameters		传递给任务函数的参数
  *	@return	无
- *	@note		无
+ *	@note	无
  ***********************************************************************/
 void Init_Task(void *pvParameters)
 {
 	/* Peripheral Device Initilization */
 	D_PID_initial(12.6,0,6.3);
-	NRF_Init(115200);									//初始化调试串口
-	printf("Flash初始化\r\n");
-	FLASH_Init();
+	NRF_Init(115200);					//初始化调试串口
+//	printf("AT24C02初始化...\r\n");
+//	AT24C02_Init();						//初始化AT24C02
 	printf("按键初始化···\r\n");
-	KEY_Init();												//初始化KEY
+	KEY_Init();							//初始化KEY
 	printf("LED初始化···\r\n");
-	LED_Init();												//初始化LED
+	LED_Init();							//初始化LED
 	printf("OLED初始化···\r\n");
-	OLED_Init();											//初始化OLED
+	OLED_Init();						//初始化OLED
 	printf("ADC初始化···\r\n");				
-	ADC_Init();												//ADC初始化
+	ADC_Init();							//ADC初始化
 	printf("舵机初始化···\r\n");
-	Steering_Init();									//初始化舵机PWM
+	Steering_Init();					//初始化舵机PWM
 	printf("电机初始化···\r\n");
-	Motor_PWM_Init();									//初始化全桥驱动SPWM
+	Motor_PWM_Init();					//初始化全桥驱动SPWM
 	printf("编码器初始化···\r\n");
-	Decode_Init();										//初始化编码器
+	Decode_Init();						//初始化编码器
 	printf("摄像头初始化···\r\n");
-	Camera_Init();										//初始化摄像头
+	Camera_Init();						//初始化摄像头
 	printf("初始化完成\r\n");
 	vTaskDelete(Init_Task_Handler); 	//删除初始化任务
 }
@@ -78,27 +77,27 @@ void Init_Task(void *pvParameters)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 /* Flash Task */
-TaskHandle_t Flash_Task_Handler;
-void Flash_Task(void *pvParameters);
+TaskHandle_t EEPROM_Task_Handler;
+void EEPROM_Task(void *pvParameters);
 
 /************************************************************************
  *	@brief	Flash
  *	@param	?
  *	@return	?
- *	@note		?
+ *	@note	?
  ***********************************************************************/
-void Flash_Task(void *pvParameters)
+void EEPROM_Task(void *pvParameters)
 {
 	while(1)
 	{
-		FLASH_EraseSector(10);
-		FLASH_WriteSector(10,(const uint8 *)"V1.0",4,0);
-		Version_Data[0] = flash_read(10,0,uint8);
-		Version_Data[1] = flash_read(10,1,uint8);
-		Version_Data[2] = flash_read(10,2,uint8);
-		Version_Data[3] = flash_read(10,3,uint8);
-		Version_Data[4] = '\0';
-		vTaskDelete(Flash_Task_Handler);
+//		printf("...\r\n");
+//		if(!AT24C02_Check())
+//			printf("AT24C02初始化成功！\r\n");
+//		else
+//			printf("AT24C02初始化失败！\r\n");
+//		vTaskDelay(1000);
+		printf("AT24C02初始化失败！\r\n");
+		vTaskDelete(EEPROM_Task_Handler);
 	}
 }
 
@@ -112,7 +111,7 @@ void ADC_Task(void *pvParameters);
  *	@brief	ADC采集
  *	@param	无
  *	@return	无
- *	@note		无
+ *	@note	无
  ***********************************************************************/
 void ADC_Task(void *pvParameters)
 {
@@ -163,7 +162,7 @@ void Camera_Task(void *pvParameters)
 // *	@brief	舵机
 // *	@param	无
 // *	@return	无
-// *	@note		无
+// *	@note	无
 // ***********************************************************************/
 //void Steering_Task(void *pvParameters)
 //{
@@ -184,7 +183,7 @@ void Decode_Task(void *pvParameters);
  *	@brief	编码器采集
  *	@param	无
  *	@return	无
- *	@note		无
+ *	@note	无
  ***********************************************************************/
 void Decode_Task(void *pvParameters)
 {
@@ -209,7 +208,7 @@ void KEY_Task(void *pvParameters);
  *	@brief	按键检测
  *	@param	无
  *	@return	无
- *	@note		无
+ *	@note	无
  ***********************************************************************/
 void KEY_Task(void *pvParameters)
 {
@@ -254,7 +253,7 @@ void LED_Task(void *pvParameters);
  *	@brief	LED闪烁
  *	@param	pvParameters		传递给任务函数的参数
  *	@return	无
- *	@note		无
+ *	@note	无
  ***********************************************************************/
 void LED_Task(void *pvParameters)
 {
@@ -277,7 +276,7 @@ void OLED_Task(void *pvParameters);
  *	@brief	OLED显示
  *	@param	pvParameters		传递给任务函数的参数
  *	@return	无
- *	@note		无
+ *	@note	无
  ***********************************************************************/
 void OLED_Task(void *pvParameters)
 {
@@ -298,7 +297,7 @@ void OLED_Task(void *pvParameters)
  *	@brief	电机PWM输出
  *	@param	pvParameters		传递给任务函数的参数
  *	@return	无
- *	@note		无
+ *	@note	无
  ***********************************************************************/
 //void Motor_Task(void *pvParameters)
 //{
@@ -314,7 +313,7 @@ void Start_Task(void *pvParameters);
  *	@brief	开始任务
  *	@param	pvParameters		传递给任务函数的参数
  *	@return	无
- *	@note		创建其他任务
+ *	@note	创建其他任务
  ***********************************************************************/
 void Start_Task(void *pvParameters)
 {
@@ -354,13 +353,6 @@ void Start_Task(void *pvParameters)
 							(void*         )NULL,
 							(UBaseType_t   )5,
 							(TaskHandle_t* )&Decode_Task_Handler);
-	/* Create Steering Task */
-//	xTaskCreate((TaskFunction_t)Steering_Task,
-//							(const char*   )"Steering",
-//							(uint16_t      )128,
-//							(void*         )NULL,
-//							(UBaseType_t   )4,
-//							(TaskHandle_t* )&Steering_Task_Handler);
 	/* Create Camera Task */
 	xTaskCreate((TaskFunction_t)Camera_Task,
 							(const char*   )"Camera",
@@ -375,13 +367,13 @@ void Start_Task(void *pvParameters)
 							(void*         )NULL,
 							(UBaseType_t   )5,
 							(TaskHandle_t* )&ADC_Task_Handler);
-	/* Create Flash Task */
-	xTaskCreate((TaskFunction_t)Flash_Task,
-							(const char*   )"Flash",
+	/* Create EEPROM Task */
+	xTaskCreate((TaskFunction_t)EEPROM_Task,
+							(const char*   )"EEPROM",
 							(uint16_t      )128,
 							(void*         )NULL,
 							(UBaseType_t   )1,
-							(TaskHandle_t* )&Flash_Task_Handler);
+							(TaskHandle_t* )&EEPROM_Task_Handler);
 	vTaskDelete(StartTask_Handler); //删除开始任务
 	taskEXIT_CRITICAL();            //退出临界区
 }
@@ -418,15 +410,15 @@ static StackType_t 	IDLE_TaskStack[configTIMER_TASK_STACK_DEPTH];
  *	@param	*ppxIdleTaskStackBuffer：	任务的堆栈
  *	@param	*pulIdleTaskStackSize：		任务堆栈的大小
  *	@return	无
- *	@note		适配静态创建任务
+ *	@note	适配静态创建任务
  ***********************************************************************/
 void vApplicationGetIdleTaskMemory(StaticTask_t* 	*ppxIdleTaskTCBBuffer	 , 
-																	 StackType_t*		*ppxIdleTaskStackBuffer,
-																	 uint32_t 			*pulIdleTaskStackSize	 )
+								   StackType_t*		*ppxIdleTaskStackBuffer,
+								   uint32_t			*pulIdleTaskStackSize	 )
 {
 	*ppxIdleTaskTCBBuffer 	= &IDLE_TaskTCB;
 	*ppxIdleTaskStackBuffer = IDLE_TaskStack; 
-	*pulIdleTaskStackSize		= configTIMER_TASK_STACK_DEPTH;
+	*pulIdleTaskStackSize	= configTIMER_TASK_STACK_DEPTH;
 }
 
 /* 定时器任务 */
@@ -439,7 +431,7 @@ static StackType_t 	Timer_TaskStack[configMINIMAL_STACK_SIZE];
  *	@param	*ppxIdleTaskStackBuffer：	任务的堆栈
  *	@param	*pulIdleTaskStackSize：		任务堆栈的大小
  *	@return	无
- *	@note		适配静态创建任务
+ *	@note	适配静态创建任务
  ***********************************************************************/
 void vApplicationGetTimerTaskMemory(StaticTask_t*	*ppxTimerTaskTCBBuffer	,
 																		StackType_t *	*ppxTimerTaskStackBuffer,
