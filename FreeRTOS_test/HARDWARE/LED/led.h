@@ -1,26 +1,26 @@
 /*********************************************************************************************************************
  * @file       		led.h
  * @version    		V1.0
- * @Software 			IAR 8.3 or MDK 5.24
+ * @Software 		IAR 8.3 or MDK 5.24
  * @TargetCore		MK66FX
  * @date       		2019-12-13
- * @note					LED接口：
- *								Peripheral			MCU
- *								LED1						A14
- *								LED2						A15
- *								LED3						A16
- *								LED4						A17
+ * @note			LED接口：
+ *					Peripheral		MCU
+ *					LED1			A14
+ *					LED2			A15
+ *					LED3			A16
+ *					LED4			A17
  ********************************************************************************************************************/
 
 #ifndef __LED_H
 #define __LED_H
 
 /*Private Define*/
-#define LED_Port		GPIOA
-#define LED1 				A14
-#define LED2 				A15
-#define LED3 				A16
-#define LED4 				A17
+#define LED_Port	GPIOA
+#define LED1 		A14
+#define LED2 		A15
+#define LED3 		A16
+#define LED4 		A17
 
 /************************************************************************
  *	@brief	LED初始化

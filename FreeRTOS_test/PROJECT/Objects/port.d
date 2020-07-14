@@ -1,10 +1,10 @@
 .\objects\port.o: ..\FreeRTOS\portable\RVDS\ARM_CM4F\port.c
 .\objects\port.o: ..\FreeRTOS\include\FreeRTOS.h
-.\objects\port.o: E:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\port.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\port.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\port.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\port.o: ..\FreeRTOS\include\FreeRTOSConfig.h
 .\objects\port.o: ..\FWLIB\inc\common.h
-.\objects\port.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\port.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\port.o: ..\CORE\MK66F18.h
 .\objects\port.o: ..\CORE\core_cm4.h
 .\objects\port.o: ..\CORE\cmsis_version.h
@@ -17,7 +17,7 @@
 .\objects\port.o: ..\FWLIB\inc\MK60_port.h
 .\objects\port.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\port.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\port.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\port.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\port.o: ..\FreeRTOS\include\projdefs.h
 .\objects\port.o: ..\FreeRTOS\include\portable.h
 .\objects\port.o: ..\FreeRTOS\include\deprecated_definitions.h

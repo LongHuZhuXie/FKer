@@ -9,7 +9,8 @@
 #ifndef _common_h
 #define _common_h
 
-#include "stdbool.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 //数据类型声明
 typedef unsigned char       uint8;   //  8 bits 

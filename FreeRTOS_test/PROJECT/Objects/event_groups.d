@@ -1,11 +1,11 @@
 .\objects\event_groups.o: ..\FreeRTOS\event_groups.c
-.\objects\event_groups.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\event_groups.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\event_groups.o: ..\FreeRTOS\include\FreeRTOS.h
-.\objects\event_groups.o: E:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\event_groups.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\event_groups.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\event_groups.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\event_groups.o: ..\FreeRTOS\include\FreeRTOSConfig.h
 .\objects\event_groups.o: ..\FWLIB\inc\common.h
-.\objects\event_groups.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\event_groups.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\event_groups.o: ..\CORE\MK66F18.h
 .\objects\event_groups.o: ..\CORE\core_cm4.h
 .\objects\event_groups.o: ..\CORE\cmsis_version.h
@@ -18,7 +18,7 @@
 .\objects\event_groups.o: ..\FWLIB\inc\MK60_port.h
 .\objects\event_groups.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\event_groups.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\event_groups.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\event_groups.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\event_groups.o: ..\FreeRTOS\include\projdefs.h
 .\objects\event_groups.o: ..\FreeRTOS\include\portable.h
 .\objects\event_groups.o: ..\FreeRTOS\include\deprecated_definitions.h

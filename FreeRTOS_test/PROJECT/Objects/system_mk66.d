@@ -1,7 +1,7 @@
 .\objects\system_mk66.o: ..\CORE\system_MK66.c
-.\objects\system_mk66.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\system_mk66.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\system_mk66.o: ..\FWLIB\inc\common.h
-.\objects\system_mk66.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\system_mk66.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\system_mk66.o: ..\CORE\MK66F18.h
 .\objects\system_mk66.o: ..\CORE\core_cm4.h
 .\objects\system_mk66.o: ..\CORE\cmsis_version.h
@@ -14,4 +14,4 @@
 .\objects\system_mk66.o: ..\FWLIB\inc\MK60_port.h
 .\objects\system_mk66.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\system_mk66.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\system_mk66.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\system_mk66.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h

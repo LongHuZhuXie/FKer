@@ -2,7 +2,7 @@
  * @file       		display.c
  * @brief      		OLEDÏÔÊ¾º¯Êý
  * @version    		V1.0
- * @Software 			IAR 8.3 or MDK 5.26
+ * @Software 		IAR 8.3 or MDK 5.26
  * @TargetCore		M66FX1M0VLQ18
  * @date       		2019-12-13
  ********************************************************************************************************************/
@@ -23,7 +23,7 @@ void OLED_Display(void)
 	char Dis_Buf[30];
 	
 	OLED_P6x8Str( 20,  0, (uint8 *)"M66FX1M0VLQ18");
-	sprintf(Dis_Buf,"Version:   %s",Version_Data);
+	sprintf(Dis_Buf,"Version:   V2.0");
 	OLED_P6x8Str( 0,  1, (uint8 *)Dis_Buf);
 	sprintf(Dis_Buf,"Core Frequence:%dMHz",(int)core_clk_mhz);
 	OLED_P6x8Str( 0,  2, (uint8 *)Dis_Buf);

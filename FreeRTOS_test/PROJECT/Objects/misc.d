@@ -1,10 +1,10 @@
 .\objects\misc.o: ..\FWLIB\src\misc.c
 .\objects\misc.o: ..\FWLIB\inc\misc.h
 .\objects\misc.o: ..\FWLIB\inc\common.h
-.\objects\misc.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\misc.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\misc.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\misc.o: ..\CORE\MK66F18.h
 .\objects\misc.o: ..\CORE\core_cm4.h
-.\objects\misc.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\misc.o: ..\CORE\cmsis_version.h
 .\objects\misc.o: ..\CORE\cmsis_compiler.h
 .\objects\misc.o: ..\CORE\cmsis_armcc.h
@@ -15,4 +15,4 @@
 .\objects\misc.o: ..\FWLIB\inc\MK60_port.h
 .\objects\misc.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\misc.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\misc.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\misc.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h

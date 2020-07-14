@@ -9,10 +9,10 @@
  *					OLED接线定义：
  *					------------------------------------
  *					SPI:
- *					OLED	    	MCU
+ *					OLED	    MCU
  *   				D0          D12
- *    			D1          D13
- *    			RES         D14
+ *    				D1          D13
+ *    				RES         D14
  *   				DC          D15
  *					------------------------------------ 
  ********************************************************************************************************************/
@@ -24,9 +24,9 @@
 #define XLevelL			0x00
 #define XLevelH			0x10
 #define XLevel			((XLevelH&0x0F)*16+XLevelL)
-#define Max_Column	128
+#define Max_Column		128
 #define Max_Row			64
-#define	Brightness	0xCF
+#define	Brightness		0xCF
 #define X_WIDTH 		128
 #define Y_WIDTH 		64
 
