@@ -16,5 +16,4 @@
 .\objects\at24c02.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\at24c02.o: ..\FWLIB\inc\MK60_port_cfg.h
 .\objects\at24c02.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\at24c02.o: ..\FWLIB\inc\MK60_i2c.h
-.\objects\at24c02.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\at24c02.o: ..\HARDWARE\IIC\SEEKFREE_IIC.h

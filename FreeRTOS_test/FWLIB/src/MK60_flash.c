@@ -71,9 +71,9 @@ __STATIC_INLINE uint8 FlashCmdStart(void)
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      FLASH初始化
-//  @return     				返回一个扇区的大小
+//  @return     返回一个扇区的大小
 //  @since      v1.0
-//  Sample usage:               uint32 dat = FLASH_GetSectorSize();
+//  Sample usage:	uint32 dat = FLASH_GetSectorSize();
 //-------------------------------------------------------------------------------------------------------------------
 uint32 FLASH_GetSectorSize(void)
 {
@@ -174,5 +174,23 @@ uint8 FLASH_WriteSector(uint32 SectorNum, const uint8 *buf, uint32 len, uint32 o
 		if(ret) return ret;
     }
     return ret;
+}
+
+void Flash_ReadBytes(uint32_t SectorNum, uint32_t offset, uint8_t *buf, uint32_t len)
+{
+	if(len > 4096)	return;
+	for(uint16_t i = 0; i < len; i++)
+		*(buf + i) = *(uint8_t *)((uint32_t)(SectorNum*SECTOR_SIZE + offset + i));
+}
+
+
+void Flash_WriteBytes(uint32_t SectorNum, uint32_t offset, uint8_t *buf, uint32_t len)
+{
+	FLASH_EraseSector(SectorNum);
+	uint8_t temp[SECTOR_SIZE];
+	Flash_ReadBytes(SectorNum, 0, temp, SECTOR_SIZE);
+	for(uint16_t i = 0; i < len; i++)
+		*(temp + offset + i) = *(buf + i);
+	FLASH_WriteSector(SectorNum, temp, SECTOR_SIZE, 0);
 }
 

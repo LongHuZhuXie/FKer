@@ -27,7 +27,6 @@
 #include "camera.h"
 #include "adc.h"
 #include "MK60_flash.h"
-#include "AT24C02.h"
 
 /* PID */
 #include "elector.h"
@@ -52,8 +51,8 @@ void Init_Task(void *pvParameters)
 	/* Peripheral Device Initilization */
 	D_PID_initial(12.6,0,6.3);
 	NRF_Init(115200);					//初始化调试串口
-//	printf("AT24C02初始化...\r\n");
-//	AT24C02_Init();						//初始化AT24C02
+	printf("FlASH初始化···\r\n");
+	FLASH_Init();						//初始化AT24C02
 	printf("按键初始化···\r\n");
 	KEY_Init();							//初始化KEY
 	printf("LED初始化···\r\n");
@@ -90,13 +89,12 @@ void EEPROM_Task(void *pvParameters)
 {
 	while(1)
 	{
-//		printf("...\r\n");
-//		if(!AT24C02_Check())
-//			printf("AT24C02初始化成功！\r\n");
-//		else
-//			printf("AT24C02初始化失败！\r\n");
-//		vTaskDelay(1000);
-		printf("AT24C02初始化失败！\r\n");
+		char str[20];
+		//FLASH_EraseSector(10);
+		Flash_WriteBytes(10,0,(uint8_t*)"MotherHunter\r\n",15);
+		Flash_ReadBytes(10,0,(uint8_t*)str,15);
+		printf("%s", str);
+		//vTaskDelay(1000);
 		vTaskDelete(EEPROM_Task_Handler);
 	}
 }
@@ -144,7 +142,7 @@ void Camera_Task(void *pvParameters)
 		if(Image_Finish_Flag)
 		{
 			Image_Binary();
-			Send_Image();
+			//Send_Image();
 			Image_Finish_Flag = 0;
 			//vTaskSuspend(Camera_Task_Handler);
 		}
@@ -190,10 +188,6 @@ void Decode_Task(void *pvParameters)
 	while(1)
 	{
 		Get_Decode_Data();
-		//printf("Decoder: %5d, %5d\r\n", Speed_L, Speed_R);
-		//printf("A  D  C: %5d, %5d, %5d\r\n", ADC_Data.L1, ADC_Data.MID, ADC_Data.R1);
-		//printf("%f\r\n",direction.error);
-//		printf("%d , %d",Motor_PWM.left_pwm1,Motor_PWM.right_pwm1);
 		vTaskDelay(10);
 	}
 }
@@ -320,60 +314,60 @@ void Start_Task(void *pvParameters)
 	taskENTER_CRITICAL();	//进入临界区 
 	/* Create Init Task */
 	xTaskCreate((TaskFunction_t)Init_Task,
-							(const char*   )"Init",
-							(uint16_t      )256,
-							(void*         )NULL,
-							(UBaseType_t   )6,
-							(TaskHandle_t* )&Init_Task_Handler);
+				(const char*   )"Init",
+				(uint16_t      )256,
+				(void*         )NULL,
+				(UBaseType_t   )6,
+				(TaskHandle_t* )&Init_Task_Handler);
 	/* Create LED Task */
 	xTaskCreate((TaskFunction_t)LED_Task,
-							(const char*   )"LED",
-							(uint16_t      )128,
-							(void*         )NULL,
-							(UBaseType_t   )2,
-							(TaskHandle_t* )&LED_Task_Handler);
+				(const char*   )"LED",
+				(uint16_t      )24,
+				(void*         )NULL,
+				(UBaseType_t   )2,
+				(TaskHandle_t* )&LED_Task_Handler);
 	/* Create OLED Task */
 	xTaskCreate((TaskFunction_t)OLED_Task,
-							(const char*   )"OLED",
-							(uint16_t      )128,
-							(void*         )NULL,
-							(UBaseType_t   )2,
-							(TaskHandle_t* )&OLED_Task_Handler);
+				(const char*   )"OLED",
+				(uint16_t      )256,
+				(void*         )NULL,
+				(UBaseType_t   )2,
+				(TaskHandle_t* )&OLED_Task_Handler);
 	/* Create KEY Task */
 	xTaskCreate((TaskFunction_t)KEY_Task,
-							(const char*   )"KEY",
-							(uint16_t      )128,
-							(void*         )NULL,
-							(UBaseType_t   )1,
-							(TaskHandle_t* )&KEY_Task_Handler);
+				(const char*   )"KEY",
+				(uint16_t      )24,
+				(void*         )NULL,
+				(UBaseType_t   )1,
+				(TaskHandle_t* )&KEY_Task_Handler);
 	/* Create Decode Task */
 	xTaskCreate((TaskFunction_t)Decode_Task,
-							(const char*   )"Decode",
-							(uint16_t      )128,
-							(void*         )NULL,
-							(UBaseType_t   )5,
-							(TaskHandle_t* )&Decode_Task_Handler);
+				(const char*   )"Decode",
+				(uint16_t      )128,
+				(void*         )NULL,
+				(UBaseType_t   )5,
+				(TaskHandle_t* )&Decode_Task_Handler);
 	/* Create Camera Task */
 	xTaskCreate((TaskFunction_t)Camera_Task,
-							(const char*   )"Camera",
-							(uint16_t      )4096,
-							(void*         )NULL,
-							(UBaseType_t   )1,
-							(TaskHandle_t* )&Camera_Task_Handler);
+				(const char*   )"Camera",
+				(uint16_t      )5120,
+				(void*         )NULL,
+				(UBaseType_t   )1,
+				(TaskHandle_t* )&Camera_Task_Handler);
 	/* Create ADC Task */
 	xTaskCreate((TaskFunction_t)ADC_Task,
-							(const char*   )"ADC",
-							(uint16_t      )256,
-							(void*         )NULL,
-							(UBaseType_t   )5,
-							(TaskHandle_t* )&ADC_Task_Handler);
+				(const char*   )"ADC",
+				(uint16_t      )256,
+				(void*         )NULL,
+				(UBaseType_t   )5,
+				(TaskHandle_t* )&ADC_Task_Handler);
 	/* Create EEPROM Task */
 	xTaskCreate((TaskFunction_t)EEPROM_Task,
-							(const char*   )"EEPROM",
-							(uint16_t      )128,
-							(void*         )NULL,
-							(UBaseType_t   )1,
-							(TaskHandle_t* )&EEPROM_Task_Handler);
+				(const char*   )"EEPROM",
+				(uint16_t      )5120,
+				(void*         )NULL,
+				(UBaseType_t   )1,
+				(TaskHandle_t* )&EEPROM_Task_Handler);
 	vTaskDelete(StartTask_Handler); //删除开始任务
 	taskEXIT_CRITICAL();            //退出临界区
 }
@@ -390,11 +384,11 @@ void Task_List_Init(void)
 {
 	//创建开始任务
 	xTaskCreate((TaskFunction_t)Start_Task,
-							(const char*   )"Start_Task",
-							(uint16_t      )128,
-							(void*         )NULL,
-							(UBaseType_t   )7,
-							(TaskHandle_t* )&StartTask_Handler);
+				(const char*   )"Start_Task",
+				(uint16_t      )128,
+				(void*         )NULL,
+				(UBaseType_t   )7,
+				(TaskHandle_t* )&StartTask_Handler);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -443,31 +437,6 @@ void vApplicationGetTimerTaskMemory(StaticTask_t*	*ppxTimerTaskTCBBuffer	,
 }
 
 /*--------------------END--------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

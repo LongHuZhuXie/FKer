@@ -42,6 +42,5 @@
 .\objects\mytask.o: ..\HARDWARE\Camera\camera.h
 .\objects\mytask.o: ..\HARDWARE\ADC\adc.h
 .\objects\mytask.o: ..\FWLIB\inc\MK60_flash.h
-.\objects\mytask.o: ..\HARDWARE\AT24C02\AT24C02.h
 .\objects\mytask.o: ..\USER\elector.h
 .\objects\mytask.o: ..\DSP\Include\arm_math.h

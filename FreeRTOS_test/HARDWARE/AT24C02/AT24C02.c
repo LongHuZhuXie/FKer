@@ -1,6 +1,6 @@
 #include "AT24C02.h"
-#include "MK60_i2c.h"
-//#include "SEEKFREE_IIC.h"
+//#include "MK60_i2c.h"
+#include "SEEKFREE_IIC.h"
 
 static void Delay_ms(uint16_t ms)
 {
@@ -12,7 +12,8 @@ static void Delay_ms(uint16_t ms)
 
 void AT24C02_Init(void)
 {
-	i2c_init(i2c0, 50*1000);
+	//i2c_init(i2c0, 100*1000);
+	IIC_init();
 }
 
 //在AT24C02指定地址读出一个数据
@@ -21,7 +22,7 @@ void AT24C02_Init(void)
 uint8_t AT24C02_ReadOneByte(uint16_t addr)
 {
 	uint8_t temp = 0;
-    temp = i2c_read_reg(i2c0, AT24C02_Address, addr);
+    temp = simiic_read_reg(AT24C02_Address, addr,IIC);
 	return temp;
 }
 //在AT24C02指定地址写入一个数据
@@ -29,7 +30,7 @@ uint8_t AT24C02_ReadOneByte(uint16_t addr)
 //DataToWrite: 要写入的数据
 void AT24C02_WriteOneByte(uint16_t addr, uint8_t data)
 {
-    i2c_write_reg(i2c0, AT24C02_Address, addr, data);
+    simiic_write_reg(AT24C02_Address, addr, data);
 	Delay_ms(2);
 }
 

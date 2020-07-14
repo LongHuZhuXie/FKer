@@ -52,10 +52,7 @@ uint32 FLASH_GetSectorSize(void);
 uint8 FLASH_EraseSector(uint32 SectorNum);
 uint8 FLASH_WriteSector(uint32 SectorNum, const uint8 *buf, uint32 len, uint32 offset);
 
-
-
-
-
-
+void Flash_ReadBytes(uint32_t SectorNum, uint32_t offset, uint8_t *buf, uint32_t len);
+void Flash_WriteBytes(uint32_t SectorNum, uint32_t offset, uint8_t *buf, uint32_t len);
 
 #endif

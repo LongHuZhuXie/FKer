@@ -482,6 +482,11 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\AT24C02\AT24C02.c</FilePath>
             </File>
+            <File>
+              <FileName>SEEKFREE_IIC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\IIC\SEEKFREE_IIC.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
