@@ -18,7 +18,7 @@
 #include "common.h"
 
 //#define ADC_RIGHT1	ADC1_SE23
-#define ADC_RIGHT2	ADC0_SE16
+#define ADC_RIGHT2		ADC0_SE16
 #define ADC_MID			ADC0_SE17
 //#define ADC_LEFT2		ADC0_SE23
 #define ADC_LEFT1		ADC0_SE18

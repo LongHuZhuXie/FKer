@@ -90,11 +90,9 @@ void EEPROM_Task(void *pvParameters)
 	while(1)
 	{
 		char str[20];
-		//FLASH_EraseSector(10);
 		Flash_WriteBytes(10,0,(uint8_t*)"MotherHunter\r\n",15);
 		Flash_ReadBytes(10,0,(uint8_t*)str,15);
 		printf("%s", str);
-		//vTaskDelay(1000);
 		vTaskDelete(EEPROM_Task_Handler);
 	}
 }
@@ -142,7 +140,7 @@ void Camera_Task(void *pvParameters)
 		if(Image_Finish_Flag)
 		{
 			Image_Binary();
-			//Send_Image();
+			Send_Image();
 			Image_Finish_Flag = 0;
 			//vTaskSuspend(Camera_Task_Handler);
 		}
