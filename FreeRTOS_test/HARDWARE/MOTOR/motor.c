@@ -27,8 +27,8 @@ void Set_Motor_PWM(void)
 {
 	if(Motor_PWM.left_pwm1 >= 0)
 	{
-		FTM0->CONTROLS[4].CnV = (uint16_t)(Motor_PWM.left_pwm1 * 2.251f);
 		FTM0->CONTROLS[5].CnV = (uint16_t)(0);
+		FTM0->CONTROLS[4].CnV = (uint16_t)(Motor_PWM.left_pwm1 * 2.251f);
 	}
 	else
 	{
@@ -37,8 +37,8 @@ void Set_Motor_PWM(void)
 	}
 	if(Motor_PWM.right_pwm1 >= 0)
 	{
-		FTM0->CONTROLS[6].CnV = (uint16_t)(Motor_PWM.right_pwm1 * 2.251f);
 		FTM0->CONTROLS[7].CnV = (uint16_t)(0);
+		FTM0->CONTROLS[6].CnV = (uint16_t)(Motor_PWM.right_pwm1 * 2.251f);
 	}
 	else
 	{
