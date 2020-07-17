@@ -49,7 +49,8 @@ void Init_Task(void *pvParameters);
 void Init_Task(void *pvParameters)
 {
 	/* Peripheral Device Initilization */
-	D_PID_initial(12.6,0,6.3);
+	D_PID_initial(0.9,0,0.34);
+	M_PID_initial(14.5f,0,1.3);
 	NRF_Init(115200);					//初始化调试串口
 	printf("FlASH初始化···\r\n");
 	FLASH_Init();						//初始化AT24C02
@@ -68,7 +69,7 @@ void Init_Task(void *pvParameters)
 	printf("编码器初始化···\r\n");
 	Decode_Init();						//初始化编码器
 	printf("摄像头初始化···\r\n");
-	Camera_Init();						//初始化摄像头
+	//Camera_Init();						//初始化摄像头
 	printf("初始化完成\r\n");
 	vTaskDelete(Init_Task_Handler); 	//删除初始化任务
 }
@@ -116,7 +117,7 @@ void ADC_Task(void *pvParameters)
 		Get_ADC_Data();
 		Direct();
 		//Direct_acr();
-		vTaskDelay(10);
+		vTaskDelay(1);
 	}
 }
 
@@ -139,8 +140,8 @@ void Camera_Task(void *pvParameters)
 	{
 		if(Image_Finish_Flag)
 		{
-			Image_Binary();
-			Send_Image();
+			//Image_Binary();
+			//Send_Image();
 			Image_Finish_Flag = 0;
 			//vTaskSuspend(Camera_Task_Handler);
 		}
@@ -345,13 +346,7 @@ void Start_Task(void *pvParameters)
 				(void*         )NULL,
 				(UBaseType_t   )5,
 				(TaskHandle_t* )&Decode_Task_Handler);
-	/* Create Camera Task */
-	xTaskCreate((TaskFunction_t)Camera_Task,
-				(const char*   )"Camera",
-				(uint16_t      )5120,
-				(void*         )NULL,
-				(UBaseType_t   )1,
-				(TaskHandle_t* )&Camera_Task_Handler);
+
 	/* Create ADC Task */
 	xTaskCreate((TaskFunction_t)ADC_Task,
 				(const char*   )"ADC",

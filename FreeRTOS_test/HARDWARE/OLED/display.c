@@ -14,8 +14,8 @@
 #include "elector.h"
 #include "camera.h"
 
-//#define ADC_MOD   1
-#define SPID_MOD  2
+#define ADC_MOD   1
+//#define SPID_MOD  2
 extern char Version_Data[5];
 
 void OLED_Display(void)
