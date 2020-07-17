@@ -2,8 +2,8 @@
 #include "MyTask.h"
 volatile Pid_struct direction;
 volatile Pid_struct speed;
-#define MSPDR 320
-#define MSPDL 320
+#define MSPDR 420
+#define MSPDL 420
 void D_PID_initial(float P , float I, float D)
 {
 	direction.error = direction.error_L = direction.error_L_L = 0;
@@ -22,6 +22,7 @@ void M_PID_initial(float P , float I, float D)
 void Direct(void)
 {
 	uint8 duty;
+	float percent_in;
 	direction.error_L_L = direction.error_L;
 	direction.error_L = direction.error;
 	float L_pce = (1.0f/ADC_Data.MID)/(1.0f/ADC_Data.MID+1.0f/ADC_Data.L1);
@@ -46,29 +47,36 @@ void Direct(void)
 		//D_PID_initial(2*(LengthL/10.0),0,0.1);
 		if (LengthL < 12.0f  && LengthL > 5.5f)
 		{
-			Speed(0, LengthL);
+			percent_in = Speed(0, LengthL);
 		}
-				if (LengthL < 6)
+				if (LengthL < 4.6)
 		{
-			direction.P=1.53f*(LengthL/10.0);
+			direction.P=1.43f*(LengthL/10.0);
 		}
-		else if(LengthL > 6 && Speed_L < 270&&Speed_R < 270){direction.P=1.97f*(LengthL/10.0);}
-		else{direction.P=2.27f*(LengthL/10.0);Motor_PWM.left_pwm1 = -1;Motor_PWM.right_pwm1 = -1;}
+		else if(LengthL > 4.6 && Speed_L < 240&&Speed_R < 240){direction.P=1.97f*(LengthL/10.0);}
+		else if (Speed_L > Speed_R*percent_in ){direction.P=2.37f*(LengthL/10.0);
+		//Motor_PWM.left_pwm1 = -6;
+		//Motor_PWM.right_pwm1 = -1;
+		}
 	}
 	else if(ADC_Data.L1 < ADC_Data.R1 && ADC_Data.R1>300)
 	{
 		//D_PID_initial(3*(LengthR/10.0),0,0.1);
+		
 		direction.error = -LengthR;
 		if (LengthR < 12.0f  && LengthR > 5.5f)
 		{
-			Speed(1, LengthR);
+			percent_in = Speed(1, LengthR);
 		}
-				if (LengthR < 6)
+				if (LengthR < 4.6)
 		{
-			direction.P=1.53f*(LengthR/10.0);
+			direction.P=1.43f*(LengthR/10.0);
 		}
-		else if(LengthR > 6 && Speed_L < 270&&Speed_R < 270){direction.P=1.97f*(LengthR/10.0);}
-		else{direction.P=2.27f*(LengthR/10.0);Motor_PWM.left_pwm1 = -1;Motor_PWM.right_pwm1 = -1;}
+		else if(LengthR > 4.6 && Speed_L < 240&&Speed_R < 240){direction.P=1.97f*(LengthR/10.0);}
+		else if (Speed_R > Speed_L*percent_in ){direction.P=2.37f*(LengthR/10.0);
+		//Motor_PWM.left_pwm1 = -1;
+		//Motor_PWM.right_pwm1 = -6;
+		}
 	}
 	Set_Motor_PWM();
 	duty = 150+(direction.P*direction.error+direction.D*(direction.error - 2*direction.error_L+ direction.error_L_L));
@@ -137,11 +145,12 @@ void Direct_acr(void)
 	Set_Steering_PWM(duty);
 }
 
-void Speed(char LR, float Length)
+float Speed(char LR, float Length)
 {
 	static char comfirm=0;
 	float r=0;
 	float prc=0;
+	float res;
 	if (comfirm == LR)
 	{}
 	else{
@@ -154,20 +163,30 @@ void Speed(char LR, float Length)
 		speed.error_L = speed.error;
 
 		r = 50.0f+(Length - 5.5f)*9.28f;
-		prc = r/(r+0.1f);
+		prc = r/(r+0.69f);
 	  speed.error = Speed_R - prc*Speed_L;
-		Motor_PWM.right_pwm1 = MSPDR - speed.P*speed.error+speed.D*(speed.error - 2*speed.error_L + speed.error_L_L); 
-		if(Motor_PWM.right_pwm1<0)Motor_PWM.right_pwm1=0;
+				if (speed.error < 4)
+		{
+			speed.error=0;
+		}
+		res = speed.P*speed.error+speed.D*(speed.error - speed.error_L); 
+		if(res>0){Motor_PWM.right_pwm1=-2.35f*res;Motor_PWM.left_pwm1=MSPDL+res*1.15f;}
+		else Motor_PWM.right_pwm1 = MSPDR;
 	}
 	else
 	{
 		speed.error_L_L = speed.error_L;
 		speed.error_L = speed.error;
 		
-		r = 50.0f+(Length - 5.5f)*10.28f;
-		prc = r/(r+0.2f);
+		r = 50.0f+(Length - 5.5f)*9.28f;
+		prc = r/(r+0.69f);
 	  speed.error = Speed_L - prc*Speed_R;
-		Motor_PWM.left_pwm1 =  MSPDL - speed.P*speed.error+speed.D*(speed.error -   speed.error_L);
-		if(Motor_PWM.left_pwm1<0)Motor_PWM.left_pwm1=0;
+		if (speed.error < 4)
+		{
+			speed.error=0;
+		}
+		res = speed.P*speed.error+speed.D*(speed.error - speed.error_L);
+		if(res > 0){Motor_PWM.left_pwm1=-2.35f*res;Motor_PWM.right_pwm1=MSPDR+res*1.15f;}
+		else Motor_PWM.left_pwm1 = MSPDL; 
 	}
 }

@@ -50,7 +50,7 @@ void Init_Task(void *pvParameters)
 {
 	/* Peripheral Device Initilization */
 	D_PID_initial(0.9,0,0.34);
-	M_PID_initial(14.5f,0,1.3);
+	M_PID_initial(0.88f,0,0.17f);
 	NRF_Init(115200);					//初始化调试串口
 	printf("FlASH初始化···\r\n");
 	FLASH_Init();						//初始化AT24C02
@@ -117,7 +117,7 @@ void ADC_Task(void *pvParameters)
 		Get_ADC_Data();
 		Direct();
 		//Direct_acr();
-		vTaskDelay(1);
+		vTaskDelay(5);
 	}
 }
 
