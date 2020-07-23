@@ -1883,20 +1883,20 @@
       </Doc>
       <Doc>
         <Name>..\USER\MyTask.c</Name>
-        <ColumnNumber>27</ColumnNumber>
-        <TopLine>43</TopLine>
-        <CurrentLine>53</CurrentLine>
+        <ColumnNumber>16</ColumnNumber>
+        <TopLine>332</TopLine>
+        <CurrentLine>120</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
         <Name>..\USER\elector.c</Name>
-        <ColumnNumber>16</ColumnNumber>
-        <TopLine>1</TopLine>
-        <CurrentLine>5</CurrentLine>
+        <ColumnNumber>79</ColumnNumber>
+        <TopLine>120</TopLine>
+        <CurrentLine>173</CurrentLine>
         <Folding>1</Folding>
-        <ContractedFolders>86</ContractedFolders>
+        <ContractedFolders>94</ContractedFolders>
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
@@ -1938,7 +1938,7 @@
       <Doc>
         <Name>..\HARDWARE\Decode\decode.c</Name>
         <ColumnNumber>0</ColumnNumber>
-        <TopLine>13</TopLine>
+        <TopLine>11</TopLine>
         <CurrentLine>22</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
@@ -1946,7 +1946,7 @@
       </Doc>
       <Doc>
         <Name>..\USER\elector.h</Name>
-        <ColumnNumber>34</ColumnNumber>
+        <ColumnNumber>5</ColumnNumber>
         <TopLine>13</TopLine>
         <CurrentLine>29</CurrentLine>
         <Folding>1</Folding>
