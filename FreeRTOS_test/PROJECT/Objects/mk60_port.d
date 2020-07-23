@@ -1,8 +1,8 @@
 .\objects\mk60_port.o: ..\FWLIB\src\MK60_port.c
 .\objects\mk60_port.o: ..\FWLIB\inc\MK60_port.h
 .\objects\mk60_port.o: ..\FWLIB\inc\common.h
-.\objects\mk60_port.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\mk60_port.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\mk60_port.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\mk60_port.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\mk60_port.o: ..\CORE\MK66F18.h
 .\objects\mk60_port.o: ..\CORE\core_cm4.h
 .\objects\mk60_port.o: ..\CORE\cmsis_version.h
@@ -15,4 +15,4 @@
 .\objects\mk60_port.o: ..\FWLIB\inc\MK60_port.h
 .\objects\mk60_port.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\mk60_port.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\mk60_port.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\mk60_port.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h

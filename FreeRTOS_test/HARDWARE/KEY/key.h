@@ -19,7 +19,7 @@
 
 #define Key_Left			A7
 #define Key_Right			A11
-#define Key_Up				A9
+#define Key_Up				A19
 #define Key_Down			A6
 #define Key_Mid				A10
 

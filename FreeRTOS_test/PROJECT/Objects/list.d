@@ -1,11 +1,11 @@
 .\objects\list.o: ..\FreeRTOS\list.c
-.\objects\list.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\list.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\list.o: ..\FreeRTOS\include\FreeRTOS.h
-.\objects\list.o: E:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\list.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\list.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\list.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\list.o: ..\FreeRTOS\include\FreeRTOSConfig.h
 .\objects\list.o: ..\FWLIB\inc\common.h
-.\objects\list.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\list.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\list.o: ..\CORE\MK66F18.h
 .\objects\list.o: ..\CORE\core_cm4.h
 .\objects\list.o: ..\CORE\cmsis_version.h
@@ -18,7 +18,7 @@
 .\objects\list.o: ..\FWLIB\inc\MK60_port.h
 .\objects\list.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\list.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\list.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\list.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\list.o: ..\FreeRTOS\include\projdefs.h
 .\objects\list.o: ..\FreeRTOS\include\portable.h
 .\objects\list.o: ..\FreeRTOS\include\deprecated_definitions.h

@@ -18,6 +18,8 @@
 /* Peripheral Device */
 #include "key.h"
 #include "led.h"
+#include "oled.h"
+#include "SEEKFREE_18TFT.h"
 #include "display.h"
 #include "motor.h"
 #include "buzzer.h"
@@ -27,6 +29,7 @@
 #include "camera.h"
 #include "adc.h"
 #include "MK60_flash.h"
+#include "Hall.h"
 
 /* PID */
 #include "elector.h"
@@ -52,24 +55,29 @@ void Init_Task(void *pvParameters)
 	D_PID_initial(0.9,0,0.34);
 	M_PID_initial(0.88f,0,0.17f);
 	NRF_Init(115200);					//初始化调试串口
-	printf("FlASH初始化···\r\n");
-	FLASH_Init();						//初始化AT24C02
+//	printf("FlASH初始化···\r\n");		//初始化Flash
+//	FLASH_Init();
+	printf("霍尔元件初始化···\r\n");	
+	Hall_Init();						//初始化霍尔元件
+	printf("蜂鸣器初始化···\r\n");		
+	Buzzer_Init();						//初始化蜂鸣器
 	printf("按键初始化···\r\n");
 	KEY_Init();							//初始化KEY
 	printf("LED初始化···\r\n");
 	LED_Init();							//初始化LED
 	printf("OLED初始化···\r\n");
 	OLED_Init();						//初始化OLED
+	lcd_init();							//初始化LCD
 	printf("ADC初始化···\r\n");				
-	ADC_Init();							//ADC初始化
+	ADC_Init();							//初始化ADC
 	printf("舵机初始化···\r\n");
 	Steering_Init();					//初始化舵机PWM
 	printf("电机初始化···\r\n");
 	Motor_PWM_Init();					//初始化全桥驱动SPWM
 	printf("编码器初始化···\r\n");
 	Decode_Init();						//初始化编码器
-	printf("摄像头初始化···\r\n");
-	//Camera_Init();						//初始化摄像头
+	//printf("摄像头初始化···\r\n");
+	//Camera_Init();					//初始化摄像头
 	printf("初始化完成\r\n");
 	vTaskDelete(Init_Task_Handler); 	//删除初始化任务
 }
@@ -117,6 +125,7 @@ void ADC_Task(void *pvParameters)
 		Get_ADC_Data();
 		Direct();
 		//Direct_acr();
+		if(!Hall_Scan())		printf("Finish\r\n");
 		vTaskDelay(5);
 	}
 }
@@ -138,13 +147,14 @@ void Camera_Task(void *pvParameters)
 
 	while(1)
 	{
-		if(Image_Finish_Flag)
-		{
-			//Image_Binary();
-			//Send_Image();
-			Image_Finish_Flag = 0;
-			//vTaskSuspend(Camera_Task_Handler);
-		}
+		vTaskDelete(Camera_Task_Handler);
+//		if(Image_Finish_Flag)
+//		{
+//			//Image_Binary();
+//			//Send_Image();
+//			Image_Finish_Flag = 0;
+//			//vTaskSuspend(Camera_Task_Handler);
+//		}
 		vTaskDelay(10);
 	}
 }
@@ -187,7 +197,7 @@ void Decode_Task(void *pvParameters)
 	while(1)
 	{
 		Get_Decode_Data();
-		vTaskDelay(10);
+		vTaskDelay(5);
 	}
 }
 
@@ -276,7 +286,7 @@ void OLED_Task(void *pvParameters)
 	while(1)
 	{
 		OLED_Display();
-		vTaskDelay(100);
+		vTaskDelay(50);
 	}
 }
 
@@ -323,7 +333,7 @@ void Start_Task(void *pvParameters)
 				(const char*   )"LED",
 				(uint16_t      )24,
 				(void*         )NULL,
-				(UBaseType_t   )2,
+				(UBaseType_t   )1,
 				(TaskHandle_t* )&LED_Task_Handler);
 	/* Create OLED Task */
 	xTaskCreate((TaskFunction_t)OLED_Task,
@@ -346,21 +356,20 @@ void Start_Task(void *pvParameters)
 				(void*         )NULL,
 				(UBaseType_t   )5,
 				(TaskHandle_t* )&Decode_Task_Handler);
-
 	/* Create ADC Task */
 	xTaskCreate((TaskFunction_t)ADC_Task,
 				(const char*   )"ADC",
-				(uint16_t      )256,
+				(uint16_t      )2048,
 				(void*         )NULL,
 				(UBaseType_t   )5,
 				(TaskHandle_t* )&ADC_Task_Handler);
 	/* Create EEPROM Task */
-	xTaskCreate((TaskFunction_t)EEPROM_Task,
-				(const char*   )"EEPROM",
-				(uint16_t      )5120,
-				(void*         )NULL,
-				(UBaseType_t   )1,
-				(TaskHandle_t* )&EEPROM_Task_Handler);
+//	xTaskCreate((TaskFunction_t)EEPROM_Task,
+//				(const char*   )"EEPROM",
+//				(uint16_t      )5120,
+//				(void*         )NULL,
+//				(UBaseType_t   )1,
+//				(TaskHandle_t* )&EEPROM_Task_Handler);
 	vTaskDelete(StartTask_Handler); //删除开始任务
 	taskEXIT_CRITICAL();            //退出临界区
 }

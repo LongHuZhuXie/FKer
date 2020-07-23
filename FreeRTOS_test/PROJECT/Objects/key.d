@@ -1,8 +1,8 @@
 .\objects\key.o: ..\HARDWARE\KEY\key.c
 .\objects\key.o: ..\HARDWARE\KEY\key.h
 .\objects\key.o: ..\FWLIB\inc\common.h
-.\objects\key.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\key.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\key.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\key.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\key.o: ..\CORE\MK66F18.h
 .\objects\key.o: ..\CORE\core_cm4.h
 .\objects\key.o: ..\CORE\cmsis_version.h
@@ -15,4 +15,4 @@
 .\objects\key.o: ..\FWLIB\inc\MK60_port.h
 .\objects\key.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\key.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\key.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\key.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h

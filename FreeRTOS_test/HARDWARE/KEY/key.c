@@ -1,15 +1,15 @@
 /*********************************************************************************************************************
- * @file       		key.c
- * @version    		V1.0
- * @Software 			IAR 8.3 or MDK 5.24
- * @TargetCore		MK66FX
- * @date       		2019-12-13
- * @note					KEY						Pin
- *								Key_Left			PA6
- *								Key_Right			PA9
- *								Key_Up				PA7
- *								Key_Dowm			PA11
- *								Key_Mid				PA10
+ * @file       	key.c
+ * @version    	V1.0
+ * @Software 	IAR 8.3 or MDK 5.24
+ * @TargetCore	MK66FX
+ * @date       	2019-12-13
+ * @note		KEY				Pin
+ *				Key_Left		A6
+ *				Key_Right		A9
+ *				Key_Up			A19
+ *				Key_Dowm		A11
+ *				Key_Mid			A10
  ********************************************************************************************************************/
  
 #include "key.h"
