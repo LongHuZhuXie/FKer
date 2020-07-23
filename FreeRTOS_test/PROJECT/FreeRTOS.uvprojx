@@ -53,7 +53,7 @@
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
-          <DebugInformation>1</DebugInformation>
+          <DebugInformation>0</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>__TARGET_FPU_VFP,__FPU_PRESENT=1,ARM_MATH_CM4,_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\FWLIB\src;..\FWLIB\inc;..\SYSTEM;..\FreeRTOS;..\FreeRTOS\include;..\FreeRTOS\portable\MemMang;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\DSP\Lib\ARM;..\DSP\Include;..\DSP\Source;..\HARDWARE\OLED;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\MOTOR;..\HARDWARE\BUZZER;..\HARDWARE\USART;..\HARDWARE\STEERING;..\HARDWARE\Decode;..\HARDWARE\Camera;..\HARDWARE\ADC;..\HARDWARE\AT24C02;..\HARDWARE\IIC</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\FWLIB\src;..\FWLIB\inc;..\SYSTEM;..\FreeRTOS;..\FreeRTOS\include;..\FreeRTOS\portable\MemMang;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\DSP\Lib\ARM;..\DSP\Include;..\DSP\Source;..\HARDWARE\OLED;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\MOTOR;..\HARDWARE\BUZZER;..\HARDWARE\USART;..\HARDWARE\STEERING;..\HARDWARE\Decode;..\HARDWARE\Camera;..\HARDWARE\ADC;..\HARDWARE\AT24C02;..\HARDWARE\IIC;..\HARDWARE\TFT;..\HARDWARE\Hall</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -478,14 +478,19 @@
               <FilePath>..\HARDWARE\ADC\adc.c</FilePath>
             </File>
             <File>
-              <FileName>AT24C02.c</FileName>
+              <FileName>SEEKFREE_18TFT.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\AT24C02\AT24C02.c</FilePath>
+              <FilePath>..\HARDWARE\TFT\SEEKFREE_18TFT.c</FilePath>
             </File>
             <File>
-              <FileName>SEEKFREE_IIC.c</FileName>
+              <FileName>SEEKFREE_FONT.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\IIC\SEEKFREE_IIC.c</FilePath>
+              <FilePath>..\HARDWARE\TFT\SEEKFREE_FONT.c</FilePath>
+            </File>
+            <File>
+              <FileName>Hall.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\Hall\Hall.c</FilePath>
             </File>
           </Files>
         </Group>

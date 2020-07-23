@@ -1,8 +1,8 @@
 .\objects\at24c02.o: ..\HARDWARE\AT24C02\AT24C02.c
 .\objects\at24c02.o: ..\HARDWARE\AT24C02\AT24C02.h
 .\objects\at24c02.o: ..\FWLIB\inc\common.h
-.\objects\at24c02.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\at24c02.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\at24c02.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\at24c02.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\at24c02.o: ..\CORE\MK66F18.h
 .\objects\at24c02.o: ..\CORE\core_cm4.h
 .\objects\at24c02.o: ..\CORE\cmsis_version.h
@@ -15,5 +15,5 @@
 .\objects\at24c02.o: ..\FWLIB\inc\MK60_port.h
 .\objects\at24c02.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\at24c02.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\at24c02.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\at24c02.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\at24c02.o: ..\HARDWARE\IIC\SEEKFREE_IIC.h

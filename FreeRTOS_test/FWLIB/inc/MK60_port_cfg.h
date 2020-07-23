@@ -117,9 +117,9 @@
 #define SPI1_PCS3_PIN   E6        // E6、               全部都是 ALT2
 
 
-#define SPI2_SCK_PIN    B21       // B21、D12           全部都是 ALT2
-#define SPI2_SOUT_PIN   B22       // B22、D13           全部都是 ALT2
-#define SPI2_SIN_PIN    B23       // B23、D14           全部都是 ALT2
+#define SPI2_SCK_PIN    D12       // B21、D12           全部都是 ALT2
+#define SPI2_SOUT_PIN   D13       // B22、D13           全部都是 ALT2
+#define SPI2_SIN_PIN    D14       // B23、D14           全部都是 ALT2
 #define SPI2_PCS0_PIN   B20       // B20、D11           全部都是 ALT2
 #define SPI2_PCS1_PIN   D15       // D15                全部都是 ALT2
 
