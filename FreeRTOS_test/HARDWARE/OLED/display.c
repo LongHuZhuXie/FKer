@@ -24,12 +24,12 @@ void OLED_Display(void)
 {
 	char Dis_Buf[30];
 
-	lcd_showstr( 12,  0, (uint8 *)"MotherHunters");
-	lcd_showstr( 12,  1, (uint8 *)"Version: V2.0");
+	//lcd_showstr( 12,  0, (uint8 *)"MotherHunters");
+	//lcd_showstr( 12,  1, (uint8 *)"Version: V2.0");
 	OLED_ShowString( 20,  -1, (uint8 *)"MotherHunters");
 	sprintf(Dis_Buf,"Batter: %.1f%V", (float)ADC_Data.Batter*2.81*3.3/4096);
 	OLED_ShowString( 0,  0, (uint8 *)Dis_Buf);
-	lcd_showstr( 12,  2, (uint8 *)Dis_Buf);
+	//lcd_showstr( 12,  2, (uint8 *)Dis_Buf);
 	
 	#if ADC_MOD
 	sprintf(Dis_Buf,"L: %5d %5d", ADC_Data.L1, ADC_Data.L2);
@@ -42,17 +42,20 @@ void OLED_Display(void)
 	OLED_ShowString( 0,  4, (uint8 *)Dis_Buf);
 	sprintf(Dis_Buf,"Right Speed: %3d",Speed_R);
 	OLED_ShowString( 0,  5, (uint8 *)Dis_Buf);
-	
-	sprintf(Dis_Buf,"L: %5d %5d", ADC_Data.L1, ADC_Data.L2);
-	lcd_showstr( 2,  3, (uint8 *)Dis_Buf);
-	sprintf(Dis_Buf,"M: %5d %5d", ADC_Data.MID, ADC_Data.MIDV);
-	lcd_showstr( 2,  4, (uint8 *)Dis_Buf);
-	sprintf(Dis_Buf,"R: %5d %5d", ADC_Data.R1, ADC_Data.R2);
-	lcd_showstr( 2,  5, (uint8 *)Dis_Buf);
-	sprintf(Dis_Buf,"Left  Speed: %3d",Speed_L);
-	lcd_showstr( 2,  6, (uint8 *)Dis_Buf);
-	sprintf(Dis_Buf,"Right Speed: %3d",Speed_R);
-	lcd_showstr( 2,  7, (uint8 *)Dis_Buf);
+	sprintf(Dis_Buf,"RV: %5d", ADC_Data.RV);
+	lcd_showstr(2,3,(uint8*)Dis_Buf);
+	sprintf(Dis_Buf,"LV: %5d",ADC_Data.LV);
+	lcd_showstr(2,4,(uint8*)Dis_Buf);
+//	sprintf(Dis_Buf,"L: %5d %5d", ADC_Data.L1, ADC_Data.L2);
+//	lcd_showstr( 2,  3, (uint8 *)Dis_Buf);
+//	sprintf(Dis_Buf,"M: %5d %5d", ADC_Data.MID, ADC_Data.MIDV);
+//	lcd_showstr( 2,  4, (uint8 *)Dis_Buf);
+//	sprintf(Dis_Buf,"R: %5d %5d", ADC_Data.R1, ADC_Data.R2);
+//	lcd_showstr( 2,  5, (uint8 *)Dis_Buf);
+//	sprintf(Dis_Buf,"Left  Speed: %3d",Speed_L);
+//	lcd_showstr( 2,  6, (uint8 *)Dis_Buf);
+//	sprintf(Dis_Buf,"Right Speed: %3d",Speed_R);
+//	lcd_showstr( 2,  7, (uint8 *)Dis_Buf);
 	#elif SPID_MOD 
 	sprintf(Dis_Buf,"SP: %f ",direction.P);
 	OLED_ShowStringOLED_ShowString( 0,  3, (uint8 *)Dis_Buf);

@@ -19,8 +19,8 @@
 #include "common.h"
 #include "MK60_uart.h"
 
-#define COL     80//图像宽度 范围1-752     K60采集不允许超过188
-#define ROW     60//图像高度	范围1-480
+#define COL     120//图像宽度 范围1-752     K60采集不允许超过188
+#define ROW     40//图像高度	范围1-480
 //#define THRESHOLD 120
 extern uint8 THRESHOLD;
 /* 摄像头命令枚举 */

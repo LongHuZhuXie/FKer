@@ -3,13 +3,13 @@
 <pre>
 <h1>礦ision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: μVision V5.28.0.0
+IDE-Version: μVision V5.27.1.0
 Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: JS  , ILCE, LIC=4ZLZX-HNVSD-E03N4-FKL4N-BPK10-15ZNK
+License Information: 1111 伊良,   , LIC=KRMW3-A8ZF7-VEJHA-1FVZ7-U3XTE-0TMHN
  
 Tool Versions:
-Toolchain:       MDK-ARM Professional  Version: 5.28.0.0
-Toolchain Path:  D:\Keil5_MDK\ARM\ARMCC\Bin
+Toolchain:       MDK-ARM Plus  Version: 5.28.0.0
+Toolchain Path:  E:\keil5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 6 (build 750)
 Assembler:       Armasm.exe V5.06 update 6 (build 750)
 Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
@@ -21,13 +21,45 @@ Target DLL:      Segger\JL2CM3.dll V2.99.36.0
 Dialog DLL:      TCM.DLL V1.36.2.0
  
 <h2>Project:</h2>
-E:\比赛\飞思卡尔\程序\FKer\FreeRTOS_test\PROJECT\FreeRTOS.uvprojx
-Project File Date:  07/23/2020
+E:\烈马人\FKrepository\FKer\FreeRTOS_test\PROJECT\FreeRTOS.uvprojx
+Project File Date:  07/24/2020
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Keil5_MDK\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\keil5\ARM\ARMCC\Bin'
 Build target 'MK66FX'
-".\Objects\Templete.axf" - 0 Error(s), 0 Warning(s).
+compiling elector.c...
+..\USER\elector.c(77): warning:  #186-D: pointless comparison of unsigned integer with zero
+  		if(checkab&&checkab_up&&times>=0)checkab_down= checkab;
+..\USER\elector.c(121): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		direction.P = 0.15f*direction.error+0.265;
+..\USER\elector.c(143): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		direction.P = 0.15f*(-direction.error)+0.265;
+..\USER\elector.c(144): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		direction.D = 0.12*direction.P;
+..\USER\elector.c(32): warning:  #177-D: variable "percent_in"  was declared but never referenced
+  	float percent_in;
+..\USER\elector.c(43): warning:  #177-D: variable "angle_L"  was declared but never referenced
+  	float angle_L;
+..\USER\elector.c(44): warning:  #177-D: variable "angle_R"  was declared but never referenced
+  	float angle_R;
+..\USER\elector.c(45): warning:  #177-D: variable "rf"  was declared but never referenced
+  	static char rf =0;
+..\USER\elector.c(47): warning:  #550-D: variable "checkab_down"  was set but never used
+  	static char checkab_down=0;
+..\USER\elector.c(259): warning:  #940-D: missing return statement at end of non-void function "Speed" 
+  }
+..\USER\elector.c(265): warning:  #177-D: variable "ROL"  was declared but never referenced
+  	static char ROL;
+..\USER\elector.c(266): warning:  #177-D: variable "res"  was declared but never referenced
+  	float res;
+..\USER\elector.c(267): warning:  #177-D: variable "rest"  was declared but never referenced
+  	float rest;
+..\USER\elector.c(268): warning:  #177-D: variable "duty"  was declared but never referenced
+  	uint8 duty;
+..\USER\elector.c: 14 warnings, 0 errors
+linking...
+Program Size: Code=28896 RO-data=4952 RW-data=308 ZI-data=147084  
+".\Objects\Templete.axf" - 0 Error(s), 14 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -38,10 +70,10 @@ Package Vendor: Keil
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_MK66FX
-  D:\Keil5_MDK\Packs\Keil\Kinetis_K60_DFP\1.5.0\Device\Include
+  E:\keil5\pack\Keil\Kinetis_K60_DFP\1.5.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

@@ -52,8 +52,8 @@ void Init_Task(void *pvParameters);
 void Init_Task(void *pvParameters)
 {
 	/* Peripheral Device Initilization */
-	D_PID_initial(0.9,0,0.34);
-	M_PID_initial(0.88f,0,0.17f);
+	D_PID_initial(1.62,0.00,0.12 );
+	M_PID_initial(0.98f,0.12,0.20f);
 	NRF_Init(115200);					//初始化调试串口
 //	printf("FlASH初始化···\r\n");		//初始化Flash
 //	FLASH_Init();
@@ -67,6 +67,7 @@ void Init_Task(void *pvParameters)
 	LED_Init();							//初始化LED
 	printf("OLED初始化···\r\n");
 	OLED_Init();						//初始化OLED
+	printf("LCD初始化...\r\n");
 	lcd_init();							//初始化LCD
 	printf("ADC初始化···\r\n");				
 	ADC_Init();							//初始化ADC
@@ -76,8 +77,8 @@ void Init_Task(void *pvParameters)
 	Motor_PWM_Init();					//初始化全桥驱动SPWM
 	printf("编码器初始化···\r\n");
 	Decode_Init();						//初始化编码器
-	//printf("摄像头初始化···\r\n");
-	//Camera_Init();					//初始化摄像头
+	printf("摄像头初始化···\r\n");
+	Camera_Init();					//初始化摄像头
 	printf("初始化完成\r\n");
 	vTaskDelete(Init_Task_Handler); 	//删除初始化任务
 }
@@ -126,7 +127,7 @@ void ADC_Task(void *pvParameters)
 		Direct();
 		//Direct_acr();
 		if(!Hall_Scan())		printf("Finish\r\n");
-		vTaskDelay(5);
+		vTaskDelay(10);
 	}
 }
 
@@ -147,15 +148,14 @@ void Camera_Task(void *pvParameters)
 
 	while(1)
 	{
-		vTaskDelete(Camera_Task_Handler);
-//		if(Image_Finish_Flag)
-//		{
-//			//Image_Binary();
-//			//Send_Image();
-//			Image_Finish_Flag = 0;
-//			//vTaskSuspend(Camera_Task_Handler);
-//		}
-		vTaskDelay(10);
+		if(Image_Finish_Flag)
+		{
+			//Image_Binary();
+			//Send_Image();
+			//Image_Finish_Flag = 0;
+			//vTaskSuspend(Camera_Task_Handler);
+		}
+		vTaskDelay(20);
 	}
 }
 
@@ -342,6 +342,13 @@ void Start_Task(void *pvParameters)
 				(void*         )NULL,
 				(UBaseType_t   )2,
 				(TaskHandle_t* )&OLED_Task_Handler);
+	/* Create Camera Task*/
+	xTaskCreate((TaskFunction_t)Camera_Task,
+				(const char*   )"Camera",
+				(uint16_t      )8000,
+				(void*         )NULL,
+				(UBaseType_t   )4,
+				(TaskHandle_t* )&Camera_Task_Handler);	
 	/* Create KEY Task */
 	xTaskCreate((TaskFunction_t)KEY_Task,
 				(const char*   )"KEY",
@@ -359,7 +366,7 @@ void Start_Task(void *pvParameters)
 	/* Create ADC Task */
 	xTaskCreate((TaskFunction_t)ADC_Task,
 				(const char*   )"ADC",
-				(uint16_t      )2048,
+				(uint16_t      )4096,
 				(void*         )NULL,
 				(UBaseType_t   )5,
 				(TaskHandle_t* )&ADC_Task_Handler);

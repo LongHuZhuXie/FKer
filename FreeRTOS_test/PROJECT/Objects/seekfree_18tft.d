@@ -1,8 +1,8 @@
 .\objects\seekfree_18tft.o: ..\HARDWARE\TFT\SEEKFREE_18TFT.c
 .\objects\seekfree_18tft.o: ..\HARDWARE\TFT\SEEKFREE_18TFT.h
 .\objects\seekfree_18tft.o: ..\FWLIB\inc\common.h
-.\objects\seekfree_18tft.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\seekfree_18tft.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\seekfree_18tft.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\seekfree_18tft.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\seekfree_18tft.o: ..\CORE\MK66F18.h
 .\objects\seekfree_18tft.o: ..\CORE\core_cm4.h
 .\objects\seekfree_18tft.o: ..\CORE\cmsis_version.h
@@ -15,7 +15,7 @@
 .\objects\seekfree_18tft.o: ..\FWLIB\inc\MK60_port.h
 .\objects\seekfree_18tft.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\seekfree_18tft.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\seekfree_18tft.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\seekfree_18tft.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\seekfree_18tft.o: ..\HARDWARE\TFT\SEEKFREE_FONT.h
 .\objects\seekfree_18tft.o: ..\FWLIB\inc\MK60_spi.h
-.\objects\seekfree_18tft.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\seekfree_18tft.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h

@@ -1,11 +1,11 @@
 .\objects\heap_4.o: ..\FreeRTOS\portable\MemMang\heap_4.c
-.\objects\heap_4.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\heap_4.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\heap_4.o: ..\FreeRTOS\include\FreeRTOS.h
-.\objects\heap_4.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\heap_4.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\heap_4.o: E:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\heap_4.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\heap_4.o: ..\FreeRTOS\include\FreeRTOSConfig.h
 .\objects\heap_4.o: ..\FWLIB\inc\common.h
-.\objects\heap_4.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\heap_4.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\heap_4.o: ..\CORE\MK66F18.h
 .\objects\heap_4.o: ..\CORE\core_cm4.h
 .\objects\heap_4.o: ..\CORE\cmsis_version.h
@@ -18,7 +18,7 @@
 .\objects\heap_4.o: ..\FWLIB\inc\MK60_port.h
 .\objects\heap_4.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\heap_4.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\heap_4.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\heap_4.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\heap_4.o: ..\FreeRTOS\include\projdefs.h
 .\objects\heap_4.o: ..\FreeRTOS\include\portable.h
 .\objects\heap_4.o: ..\FreeRTOS\include\deprecated_definitions.h

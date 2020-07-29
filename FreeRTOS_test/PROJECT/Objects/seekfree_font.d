@@ -1,8 +1,8 @@
 .\objects\seekfree_font.o: ..\HARDWARE\TFT\SEEKFREE_FONT.c
 .\objects\seekfree_font.o: ..\HARDWARE\TFT\SEEKFREE_FONT.h
 .\objects\seekfree_font.o: ..\FWLIB\inc\common.h
-.\objects\seekfree_font.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\seekfree_font.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\seekfree_font.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\seekfree_font.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\seekfree_font.o: ..\CORE\MK66F18.h
 .\objects\seekfree_font.o: ..\CORE\core_cm4.h
 .\objects\seekfree_font.o: ..\CORE\cmsis_version.h
@@ -15,4 +15,4 @@
 .\objects\seekfree_font.o: ..\FWLIB\inc\MK60_port.h
 .\objects\seekfree_font.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\seekfree_font.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\seekfree_font.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\seekfree_font.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h

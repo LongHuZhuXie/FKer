@@ -25,8 +25,8 @@
 #define ADC_MIDV		ADC0_SE9
 #define ADC_LEFT1		ADC0_SE15
 #define ADC_LEFT2		ADC0_SE8
-//#define ADC_BaseH		ADC0_SE15
-//#define ADC_BaseV		ADC0_SE8
+#define ADC_BaseH		ADC0_SE16
+#define ADC_BaseV		ADC0_SE10
 #define ADC_BATTER		ADC0_SE11
 
 
@@ -38,8 +38,8 @@ typedef volatile struct __ADC_Data_Type
 	uint16 MIDV;
 	uint16 R1;
 	uint16 R2;
-	uint16 BaseV;
-	uint16 BaseH;
+	uint16 LV;
+	uint16 RV;
 	uint16 Batter;
 } __ADC_Data;
 

@@ -1,8 +1,8 @@
 .\objects\hall.o: ..\HARDWARE\Hall\Hall.c
 .\objects\hall.o: ..\HARDWARE\Hall\Hall.h
 .\objects\hall.o: ..\FWLIB\inc\common.h
-.\objects\hall.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\hall.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\hall.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\hall.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\hall.o: ..\CORE\MK66F18.h
 .\objects\hall.o: ..\CORE\core_cm4.h
 .\objects\hall.o: ..\CORE\cmsis_version.h
@@ -15,4 +15,4 @@
 .\objects\hall.o: ..\FWLIB\inc\MK60_port.h
 .\objects\hall.o: ..\FWLIB\inc\MK60_gpio.h
 .\objects\hall.o: ..\FWLIB\inc\MK60_port_cfg.h
-.\objects\hall.o: D:\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\hall.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdio.h
