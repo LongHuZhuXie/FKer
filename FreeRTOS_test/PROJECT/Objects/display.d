@@ -25,6 +25,7 @@
 .\objects\display.o: ..\DSP\Include\arm_math.h
 .\objects\display.o: E:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\display.o: E:\keil5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\display.o: ..\HARDWARE\BUZZER\buzzer.h
 .\objects\display.o: ..\HARDWARE\Camera\camera.h
 .\objects\display.o: ..\HARDWARE\OLED\oled.h
 .\objects\display.o: ..\HARDWARE\TFT\SEEKFREE_18TFT.h

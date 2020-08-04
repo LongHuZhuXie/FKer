@@ -24,6 +24,7 @@
 .\objects\elector.o: ..\DSP\Include\arm_math.h
 .\objects\elector.o: E:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\elector.o: E:\keil5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\elector.o: ..\HARDWARE\BUZZER\buzzer.h
 .\objects\elector.o: ..\USER\MyTask.h
 .\objects\elector.o: ..\FreeRTOS\include\FreeRTOS.h
 .\objects\elector.o: E:\keil5\ARM\ARMCC\Bin\..\include\stddef.h

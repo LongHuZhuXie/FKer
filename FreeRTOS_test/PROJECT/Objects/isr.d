@@ -27,4 +27,5 @@
 .\objects\isr.o: ..\DSP\Include\arm_math.h
 .\objects\isr.o: E:\keil5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\isr.o: E:\keil5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\isr.o: ..\HARDWARE\BUZZER\buzzer.h
 .\objects\isr.o: E:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h

@@ -22,8 +22,37 @@ uint8		image_binary[ROW][COL/8];
 uint8   receive[3];
 uint8   receive_num = 0;
 uint8   uart_receive_flag = 1;
-uint8 THRESHOLD= 120;
+uint8 THRESHOLD= 130;
+uint8 Left_Line[50];
+uint8 Left_Add[50];
+uint8 Mid_Line[50];
+uint8 Right_Add[50];
+uint8 Right_Line[50];
+uint8 Left_Line_New[50];
+uint8 Right_Line_New[50];
+uint8 width[50];
+uint8 detect_image[35][184];
+uint8 certainty[3];
+uint8 stop_flag=0;
+uint8 Mid_Count=40;
+uint8 Left_Line_New[50];
+uint8 Right_Line_New[50];
+uint8 width_Min;
+uint8 Left_Max;
+uint8 Right_Min;
 
+uint8	Left_Max = 2;
+uint8	Right_Min = 78;
+uint8	Left_y = 59;
+uint8	Right_y = 59;
+uint8	Width_Min = 80;
+uint8	Repair_Flag = 0;
+uint8	Left_Add_Start = 0;
+uint8	Right_Add_Start = 0;
+uint8	Left_Add_End = 0;
+uint8	Right_Add_End = 0;
+uint8	Foresight_Left = 2;
+uint8	Foresight_Right = 78;
 
 //需要配置到摄像头的数据
 int16 MT9V032_CFG[CONFIG_FINISH][2]=
@@ -301,7 +330,45 @@ void Send_Image(void)
 	//uart_putbuff(DEBUG_PORT, (uint8_t *)image, ROW*COL);
 }
 
+void Image_manage()
+{
+	int i ;
+			First_linecope((uint8 *)image);
+		for (i=ROW-2;i >= ROW-Mid_Count;i--)
+		{			
+			Traversal_Mid_Line(i,(uint8 *)image);
+		}
+}
+	
+
 void Image_Binary()
+{
+	uint8 pos=0;
+	uint8 tmpdst;
+	uint8 j;
+	uint8 i;
+	for (i = 0; i < ROW; i++)
+	{
+		for (j = 0; j < COL ; j++)
+		{
+			if (image[i][j] < THRESHOLD) {image[i][j]=0;}
+			else {image[i][j]=1;}
+//			pos++;
+//			if (pos == 8)
+//			{
+//				pos = 0;
+//				image_binary[i][k] = tmpdst;
+//				k+=1;
+//			}
+			//printf("pos=%d [%d][%d]\n",pos,i,k);
+		}
+	}
+
+	
+		
+}
+
+void Image_recontract()
 {
 	uint8 pos=0;
 	uint8 tmpdst;
@@ -313,8 +380,8 @@ void Image_Binary()
 		k=0;
 		for (j = 0; j < COL ; j++)
 		{
-			if (image[i][j] < THRESHOLD) tmpdst = (tmpdst<<1);
-			else tmpdst = (tmpdst<<1)| 0x01;
+			if (!image[i][j]) {tmpdst = (tmpdst<<1);}
+			else {tmpdst = (tmpdst<<1)| 0x01;}
 			pos++;
 			if (pos == 8)
 			{
@@ -322,8 +389,309 @@ void Image_Binary()
 				image_binary[i][k] = tmpdst;
 				k+=1;
 			}
-			//printf("pos=%d [%d][%d]\n",pos,i,k);
 		}
 	}
 }
 
+void First_linecope(uint8 * data)
+{
+	uint8 j;
+	uint8 i=ROW-1;
+	static uint8 c_pos=0;
+	static uint8 c_res=0;
+	uint8 left_dc=0;
+	uint8 right_dc=0;
+	
+	if (data[184*i+COL/2])
+	{
+		Mid_Line[49] = COL/2;
+	}
+	else if(data[184*i+ COL/3])
+	{
+		Mid_Line[49]= COL/3;
+	}
+	else if(data[(int)(184*i+COL*3.0f/4)])
+	{
+		Mid_Line[49]= COL*3.0f/4;
+	}
+	
+	for (j = Mid_Line[49]; j >= 2; j--)	//以前一行中点为起点向左查找边界
+	{
+		if (!data[184*i+j] && !data[184*i+j-1])//检测到连续两个黑点，起到滤波的效果
+		{
+			Left_Add[i] = 0;		 //左边界不需要补线，清除标志位
+			Left_Line[i] = j;		 //记录当前j值为第i行左边界
+//			data[80 * i + j + 2] = 0;//右移2位显示左边界，方便调试观察
+			
+			break;
+		}
+	}
+	if (Left_Add[i])
+	{
+		Left_Line[i] = 0;
+	}
+	for (j = Mid_Line[49]; j < 183; j++)//以前一行中点为起点向右查找右边界
+	{
+		if (!data[184*i+j] && !data[184*i+j+1])//检测到连续两个黑点，起到滤波的效果
+		{
+			Right_Add[i] = 0;		 //右边界不需要补线，清除标志位
+			Right_Line[i] = j;		 //记录当前j值为第i行右边界
+//			data[80 * i + j - 2] = 0;//左移2位显示右边界，方便调试观察
+			
+			break;
+		}
+	}
+	if (Right_Add[i])
+	{
+		Right_Line[i] = COL-1;
+	}
+	Mid_Line[i] = (Right_Line[i] + Left_Line[i])/2 ;
+	width[i] = Right_Line[i] - Left_Line[i];
+
+}
+void Traversal_Mid_Line(uint8 i, uint8 *data)	//从中间向两边扫描边界
+{
+	uint8 j;
+	static uint8 c_pos=0;
+	static uint8 c_res=0;
+	//Mid_Line[49]= 92;
+	uint8 left_dc=0;
+	uint8 right_dc=0;
+	for (j = Mid_Line[i + 1]; j >= 2; j--)	//以前一行中点为起点向左查找边界
+	{
+		if (!data[184*i+j] && !data[184*i+j-1])//检测到连续两个黑点，起到滤波的效果
+		{
+			Left_Add[i] = 0;		 //左边界不需要补线，清除标志位
+			Left_Line[i] = j;		 //记录当前j值为第i行左边界
+//			data[80 * i + j + 2] = 0;//右移2位显示左边界，方便调试观察
+			
+			break;
+		}
+	}
+	if (Left_Add[i])
+	{
+		Left_Line[i] = 0;
+	}
+	for (j = Mid_Line[i + 1]; j < 183; j++)//以前一行中点为起点向右查找右边界
+	{
+		if (!data[184*i+j] && !data[184*i+j+1])//检测到连续两个黑点，起到滤波的效果
+		{
+			Right_Add[i] = 0;		 //右边界不需要补线，清除标志位
+			Right_Line[i] = j;		 //记录当前j值为第i行右边界
+//			data[80 * i + j - 2] = 0;//左移2位显示右边界，方便调试观察
+			
+			break;
+		}
+	}
+	if (Right_Add[i])
+	{
+		Right_Line[i] = COL-1;
+	}
+	Mid_Line[i] = (Right_Line[i] + Left_Line[i])/2 ;
+	width[i] = Right_Line[i] - Left_Line[i];
+	//printf("width[%d] = %d\n",i,width[i]);
+	if (width[i] < 25 && Mid_Line[i+1]!=0&&width[i]!=0)
+	{
+				for (j = Left_Line[i]; j >= 2; j--)	//以前一行中点为起点向左查找边界
+		{
+			if (data[184*i+j] && data[184*i+j-1])//检测到连续两个白点，起到滤波的效果
+			{
+
+				if (Left_Line[i]-j < 20)
+				{
+					left_dc=1;
+				}
+				else
+					left_dc=0;
+				break;
+			}
+		}
+			for (j = Right_Line[i]; j < 183; j++)//以前一行中点为起点向右查找右边界
+	{
+		if (!data[184*i+j] && !data[184*i+j+1])//检测到连续两个白点，起到滤波的效果
+		{
+						if (j-Right_Line[i] < 20)
+				{
+					right_dc=1;
+				}
+				else
+					right_dc=0;
+
+			
+			break;
+		}
+	}
+	if (right_dc&&left_dc)
+	{
+		//printf("check maybe start\n");
+		c_pos++;
+		if (c_pos==4)
+		{
+			//printf("realy check start\n");
+			c_pos=0;
+						if(c_res == 8)
+			{
+				printf("8 check\n");
+				stop_flag=1;
+				c_res=0;
+			}
+			c_res++;
+		}
+	}
+	else
+	{
+		c_pos = 0;
+	}
+	}
+}
+
+void iteration_Thresholdfigure()//迭代阈值计算
+{
+	int Low_temp;
+	int high_temp;
+	uint8 T0;
+	uint8 T1;
+	uint8 max_G=0;
+	uint8 min_G=255;
+	uint8 i,j;
+	uint16 h_num;
+	uint16 l_num;
+		for (i = 0; i < ROW; i++)
+	{
+		for (j = 0; j < COL ; j++)
+		{
+			if (min_G>image[i][j])
+			{
+				min_G = image[i][j];
+			}
+			if (max_G<image[i][j])
+			{
+				max_G=image[i][j];
+			}
+		}
+	}
+	T0 = min_G+max_G/2; 
+	while (1)
+	{
+		high_temp = 0;
+		Low_temp = 0;
+		l_num=0;
+		h_num=0;
+				for (i = 0; i < ROW; i++)
+		{
+			for (j = 0; j < COL ; j++)
+			{
+				if (image[i][j]>=T0)
+				{
+					high_temp+=image[i][j];
+					h_num++;
+				}
+				else
+				{
+					Low_temp +=image[i][j];
+					l_num++;
+				}
+			}
+		}
+		T1 = (high_temp/h_num+Low_temp/l_num)/2;
+		if (T1 == T0)
+		{
+			THRESHOLD = 1.4*T0;
+			break;
+		}
+		else
+		{
+			T0 = T1;
+		}
+	}
+
+}
+
+
+void Mid_Filtering(uint8 *data)		//中线滤波
+{
+	uint8 i, Count;
+	
+	Count = ROW - Mid_Count;	//判断一共有多少多少可用中点
+	for (i = ROW-2; i > Count; i--)	//从下向上滤波
+	{
+		//printf("ML[%d] = %d\n",i,Mid_Line[i]);
+		Mid_Line[i] = Mid_Line[i+1]*0.3 + Mid_Line[i]*0.7;
+	}
+	for (i = Count; i < COL-1; i++)	//从上向下互补滤波
+	{
+		Mid_Line[i] = Mid_Line[i-1]*0.3 + Mid_Line[i]*0.7;
+	}
+	for (i = ROW-1; i >= Count+3; i--)
+	{
+		data[184*i + Mid_Line[i]] = 0;	//将中线在图像上显示出来
+	}
+}
+
+void Traversal_Left_Side(uint8 i, uint8 *data)
+{
+	uint8 j;
+	
+	for (j = Left_Line[i+1]; j < 78; j++)
+	{
+//		if (data[80*i+j] && data[80*i+j-1])//检测到连续两个白点，起到滤波的效果
+		if (data[80*i+j])//检测到白点
+		{
+			Left_Add[i] = 0;		 //左边界不需要补线，清除标志位
+			Left_Line[i] = j;		 //记录当前j值为第i行左边界
+			
+			break;
+		}
+	}
+}
+
+void Traversal_Right_Side(uint8 i, uint8 *data)
+{
+	uint8 j;
+	
+	for (j = Right_Line[i+1]; j > 2; j--)
+	{
+//		if (data[80*i+j] && data[80*i+j-1])//检测到连续两个白点，起到滤波的效果
+		if (data[80*i+j])//检测到白点
+		{
+			Right_Add[i] = 0;		 //右边界不需要补线，清除标志位
+			Right_Line[i] = j;		 //记录当前j值为第i行右边界
+			
+			break;
+		}
+	}
+}
+
+void Repair_check(uint8 i)
+{
+	
+	if (Left_Add[i+1])	//前一行补线了
+	{
+		if (Left_Line[i] < Left_Line_New[i+1]-1)	//与前一行的左边界实线比较	
+		{
+			Left_Add[i] = 1;
+		}
+	}
+	else	//前一行没有补线
+	{
+		if (Left_Line[i] < Left_Line[i+1]-1)	//与前一行的左边界实线比较	
+		{
+			Left_Add[i] = 1;
+		}
+	}
+	
+	if (Right_Add[i+1])	//前一行右边界补线了	
+	{
+		if (Right_Line[i] > Right_Line_New[i+1]+1)	//与前一行的右边界实线进行比较
+		{
+			Right_Add[i] = 1;
+		}
+	}
+	else	//前一行右边界没有补线
+	{
+		if (Right_Line[i] > Right_Line[i+1]+1)		//与前一行的右边界实线进行比较
+		{
+			Right_Add[i] = 1;
+		}
+	}
+}

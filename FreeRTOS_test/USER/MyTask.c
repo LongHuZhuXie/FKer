@@ -68,7 +68,7 @@ void Init_Task(void *pvParameters)
 	printf("OLED初始化···\r\n");
 	OLED_Init();						//初始化OLED
 	printf("LCD初始化...\r\n");
-	lcd_init();							//初始化LCD
+	//lcd_init();							//初始化LCD
 	printf("ADC初始化···\r\n");				
 	ADC_Init();							//初始化ADC
 	printf("舵机初始化···\r\n");
@@ -124,9 +124,29 @@ void ADC_Task(void *pvParameters)
 	while(1)
 	{
 		Get_ADC_Data();
-		Direct();
+		if(!road_flag)
+			M_start();
+		else if(!stop_flag)
+		{Direct();
+			;
+		}
+		else
+		{
+			if(Speed_L>40)
+			{
+			Motor_PWM.left_pwm1=-150;
+			Motor_PWM.right_pwm1=-150;
+			}
+			else
+			{
+				Motor_PWM.left_pwm1=5;
+				Motor_PWM.right_pwm1=5;
+			}
+		  Set_Motor_PWM();
+			Set_Steering_PWM(166);
+		}
 		//Direct_acr();
-		if(!Hall_Scan())		printf("Finish\r\n");
+		//if(!Hall_Scan())		{printf("Finish\r\n");}
 		vTaskDelay(10);
 	}
 }
@@ -145,17 +165,40 @@ void Camera_Task(void *pvParameters);
  ***********************************************************************/
 void Camera_Task(void *pvParameters)
 {
-
+	int i;
+	uint8 *data= (uint8 *)image;
 	while(1)
 	{
+		THRESHOLD=97;
 		if(Image_Finish_Flag)
 		{
-			//Image_Binary();
+			//iteration_Thresholdfigure();
+			Image_Binary();
+			//printf("%d\n",THRESHOLD);
+			
+			//Image_recontract();
+			for (i=0;i<50;i++)
+			{
+				Left_Add[i]=1;
+				Right_Add[i]=1;
+				width[i]=0;
+			}
+			First_linecope((uint8 *)image);
+			for (i=ROW-2;i >= ROW-35;i--)
+			{		//	if(!data[i*COL+Mid_Line[i+1]])
+				//{
+				//	Mid_Count=49-i;
+				//	break;
+				//}
+				Traversal_Mid_Line(i,(uint8 *)image);
+			}
+			//Mid_Filtering((uint8 *)image);
+			//Image_recontract();
 			//Send_Image();
-			//Image_Finish_Flag = 0;
-			//vTaskSuspend(Camera_Task_Handler);
+			Image_Finish_Flag = 0;
+			vTaskSuspend(Camera_Task_Handler);
 		}
-		vTaskDelay(20);
+		vTaskDelay(10);
 	}
 }
 
@@ -216,21 +259,25 @@ void KEY_Task(void *pvParameters);
 void KEY_Task(void *pvParameters)
 {
 	uint8_t KEY_Num = 0;
-	
+	static uint8 duty=150;
 	while(1)
 	{
 		KEY_Num = KEY_Scan();
 		if(KEY_Num == 1)
 		{
 			KEY_Num = 0;
+			Set_Steering_PWM(duty);
+			
 		}
 		if(KEY_Num == 2)
 		{
 			KEY_Num = 0;
+			duty++;
 		}
 		if(KEY_Num == 3)
 		{
 			KEY_Num = 0;
+			duty --;
 		}
 		if(KEY_Num == 4)
 		{
@@ -242,7 +289,6 @@ void KEY_Task(void *pvParameters)
 			Motor_PWM.left_pwm1 = 0;
 			Set_Motor_PWM();
 		}
-		vTaskDelay(100);
 	}
 }
 
@@ -266,6 +312,7 @@ void LED_Task(void *pvParameters)
 		vTaskDelay(250);
 		LED_Flash();
 		vTaskDelay(250);
+		
 	}
 }
 
