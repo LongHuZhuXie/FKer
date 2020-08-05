@@ -169,7 +169,7 @@ void Camera_Task(void *pvParameters)
 	uint8 *data= (uint8 *)image;
 	while(1)
 	{
-		THRESHOLD=97;
+		THRESHOLD=180;
 		if(Image_Finish_Flag)
 		{
 			//iteration_Thresholdfigure();

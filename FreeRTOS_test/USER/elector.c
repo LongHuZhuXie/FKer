@@ -1,8 +1,8 @@
 #include "elector.h"
 #include "MyTask.h"
 #define MIDMAX 4080
-#define V_HL 239
-#define V_HR 239
+#define V_HL 230
+#define V_HR 230
 volatile Pid_struct direction;
 volatile Pid_struct speed;
 volatile Pid_struct RoundAb;
@@ -117,14 +117,10 @@ void Direct(void)
 	contrast2 = (1.0f*ADC_Data.L2 -ADC_Data.MID)/((float)ADC_Data.L2+ADC_Data.MID)-(1.0f*ADC_Data.R2 -ADC_Data.MID)/((float)ADC_Data.R2+ADC_Data.MID);	
 	if(ADC_Data.L2 > ADC_Data.R2 && ADC_Data.L1 >300)
 	{
-//			if((ADC_Data.MID<MIDMAX*0.9&&ADC_Data.L1<ADC_Data.L2)||ADC_Data.L2>0.5*MIDMAX)
-//		{
-//			ADC_Data.L1 = ADC_Data.L2;
-//		}
-		if (contrast1>contrast2)
-			rescontrast = 7*contrast1;
-		else
-			rescontrast = 7*contrast2;
+			if((ADC_Data.MID<MIDMAX*0.9&&ADC_Data.L1<ADC_Data.L2)||ADC_Data.L2>0.5*MIDMAX)
+		{
+			ADC_Data.L1 = ADC_Data.L2;
+		}
 		R_pce = (1.0f/ADC_Data.MID)/(1.0f/ADC_Data.MID+1.0f/ADC_Data.R1);
 		LengthR = (12.0f*R_pce);
 		L_pce = (1.0f/ADC_Data.MID)/(1.0f/ADC_Data.MID+1.0f/ADC_Data.L1);
@@ -134,20 +130,19 @@ void Direct(void)
 		printf ("rc = %.3f\n",rescontrast);
 		direction.error_L_L = direction.error_L;
 		direction.error_L = direction.error;
-		//direction.error = LengthL;
-		direction.error = rescontrast;
-		
-			direction.P = 0.158f*direction.error+0.525+0.002f*Speed_L;
+		direction.error = LengthL;
+			direction.P = 0.158f*direction.error+0.485;
+		//direction.P = 0.158f*direction.error+0.525+0.002f*Speed_L;
 			direction.D = 0.34*direction.P;
 	if (ADC_Data.MID>0.7f*MIDMAX&&ADC_Data.MIDV>0.5f*MIDMAX)direction.error=0;
-//		}
+	if (7*contrast1<1.1)direction.error=0;
 	}
 	else if(ADC_Data.L2 < ADC_Data.R2 && ADC_Data.R1>300)
 	{
-//			if((ADC_Data.MID<MIDMAX*0.9&&ADC_Data.R1<ADC_Data.R2)||ADC_Data.R2>0.5*MIDMAX)
-//		{
-//			ADC_Data.R1 = ADC_Data.R2;
-//		}
+			if((ADC_Data.MID<MIDMAX*0.9&&ADC_Data.R1<ADC_Data.R2)||ADC_Data.R2>0.5*MIDMAX)
+		{
+			ADC_Data.R1 = ADC_Data.R2;
+		}
 		if (contrast1<contrast2)
 			rescontrast = 7*contrast1;
 		else
@@ -160,15 +155,15 @@ void Direct(void)
 		printf ("rc = %.3f\n",rescontrast);
 		direction.error_L_L = direction.error_L;
 		direction.error_L = direction.error;
-		//direction.error = -LengthR;
-			direction.error = rescontrast;
+		direction.error = -LengthR;
+		
+			direction.P = 0.158f*(-direction.error)+0.485;
 			//direction.P = 0.158f*(-direction.error)+0.525+0.002f*Speed_R;
-			direction.P = 0.158f*(-direction.error)+0.525+0.002f*Speed_R;
 			direction.D = 0.34*direction.P;
 
 		if (ADC_Data.MID>0.7f*MIDMAX&&ADC_Data.MIDV>0.5f*MIDMAX)direction.error=0;
+		if (7*contrast1>-1.1)direction.error=0;
 	}
-
 	//if (angle > 84 && (direction.error<3.0&&direction.error>-3.0))direction.error=0;
 	
 	//printf("error= %f\n",direction.error);
